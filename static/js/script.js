@@ -1,6 +1,6 @@
-/**
+﻿/**
  * FieldVision AI - Futuristic Frontend Engine
- * Plantix-Style Bottom Navigation, Real-time WebRTC AR Camera, 
+ * FieldVision-Style Bottom Navigation, Real-time WebRTC AR Camera, 
  * Laser Sweep Animation, Dual Remedy & Cost Engine, Weather Advisory
  * 
  * Developer: Sanket Kirdat (Department of AI & Data Science)
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const districtSelect = document.getElementById("districtSelect");
 
     // ==========================================================
-    // 1. PLANTIX-STYLE BOTTOM TAB NAVIGATION
+    // 1. FieldVision-STYLE BOTTOM TAB NAVIGATION
     // ==========================================================
     window.switchTab = function(tabId) {
         // Hide all views
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     currentDiseaseData = data;
                     renderDiagnosisResults(data);
                 } else {
-                    alert(data.error || "निदान करताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा.");
+                    alert(data.error || "à¤¨à¤¿à¤¦à¤¾à¤¨ à¤•à¤°à¤¤à¤¾à¤¨à¤¾ à¤¤à¥à¤°à¥à¤Ÿà¥€ à¤†à¤²à¥€. à¤•à¥ƒà¤ªà¤¯à¤¾ à¤ªà¥à¤¨à¥à¤¹à¤¾ à¤ªà¥à¤°à¤¯à¤¤à¥à¤¨ à¤•à¤°à¤¾.");
                 }
             }, 1200);
 
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 arLaser.classList.remove("scanning");
                 arTelemetry.classList.add("hidden");
-                alert("सर्व्हरशी संपर्क होऊ शकला नाही. कृपया इंटरनेट / स्थानिक नेटवर्क तपासा.");
+                alert("à¤¸à¤°à¥à¤µà¥à¤¹à¤°à¤¶à¥€ à¤¸à¤‚à¤ªà¤°à¥à¤• à¤¹à¥‹à¤Š à¤¶à¤•à¤²à¤¾ à¤¨à¤¾à¤¹à¥€. à¤•à¥ƒà¤ªà¤¯à¤¾ à¤‡à¤‚à¤Ÿà¤°à¤¨à¥‡à¤Ÿ / à¤¸à¥à¤¥à¤¾à¤¨à¤¿à¤• à¤¨à¥‡à¤Ÿà¤µà¤°à¥à¤• à¤¤à¤ªà¤¾à¤¸à¤¾.");
             }, 1000);
         }
     }
@@ -258,18 +258,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Header info
-        if (resCropName) resCropName.textContent = data.crop_name || "पीक";
+        if (resCropName) resCropName.textContent = data.crop_name || "à¤ªà¥€à¤•";
         if (resDiseaseName) resDiseaseName.textContent = data.marathi_name || data.disease_code;
         if (resDiseaseCode) resDiseaseCode.textContent = data.disease_code || "";
         if (resConfidenceVal) resConfidenceVal.textContent = `${data.confidence}%`;
 
         // Foliar Symptoms
-        if (resSymptomsText) resSymptomsText.textContent = data.symptoms || "पानावर रोगाची लक्षणे दिसून येत आहेत.";
+        if (resSymptomsText) resSymptomsText.textContent = data.symptoms || "à¤ªà¤¾à¤¨à¤¾à¤µà¤° à¤°à¥‹à¤—à¤¾à¤šà¥€ à¤²à¤•à¥à¤·à¤£à¥‡ à¤¦à¤¿à¤¸à¥‚à¤¨ à¤¯à¥‡à¤¤ à¤†à¤¹à¥‡à¤¤.";
 
         // Dual Remedy & Cost Card 1: Organic
         const orgCost = data.organic_cost || 650;
         if (resOrgCost) {
-            resOrgCost.innerHTML = `₹ ${orgCost} <span class="per-acre">${currentLang === "mr" ? "/ एकर" : "/ acre"}</span>`;
+            resOrgCost.innerHTML = `â‚¹ ${orgCost} <span class="per-acre">${currentLang === "mr" ? "/ à¤à¤•à¤°" : "/ acre"}</span>`;
         }
         if (resOrganicText) {
             resOrganicText.innerHTML = formatPrescriptionText(data.organic_remedy);
@@ -278,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Dual Remedy & Cost Card 2: Chemical
         const chemCost = data.chemical_cost || data.cost_per_acre || 1250;
         if (resChemCost) {
-            resChemCost.innerHTML = `₹ ${chemCost} <span class="per-acre">${currentLang === "mr" ? "/ एकर" : "/ acre"}</span>`;
+            resChemCost.innerHTML = `â‚¹ ${chemCost} <span class="per-acre">${currentLang === "mr" ? "/ à¤à¤•à¤°" : "/ acre"}</span>`;
         }
         if (resChemicalText) {
             resChemicalText.innerHTML = formatPrescriptionText(data.chemical_remedy);
@@ -315,11 +315,11 @@ document.addEventListener("DOMContentLoaded", () => {
         stopCamera();
 
         const sampleMap = {
-            "Tomato_Early_Blight": "/static/sample_test_images/Tomato_Early_Blight_करपा_Original.jpg",
-            "Tomato_Late_Blight": "/static/sample_test_images/Tomato_Late_Blight_तांबोरा_Original.jpg",
-            "Potato_Early_Blight": "/static/sample_test_images/Potato_Early_Blight_करपा_Original.jpg",
-            "Corn_Rust": "/static/sample_test_images/Corn_Common_Rust_तांबेरा_Original.jpg",
-            "Tomato_Healthy": "/static/sample_test_images/Tomato_Healthy_निरोगी_Original.jpg"
+            "Tomato_Early_Blight": "/static/sample_test_images/Tomato_Early_Blight_à¤•à¤°à¤ªà¤¾_Original.jpg",
+            "Tomato_Late_Blight": "/static/sample_test_images/Tomato_Late_Blight_à¤¤à¤¾à¤‚à¤¬à¥‹à¤°à¤¾_Original.jpg",
+            "Potato_Early_Blight": "/static/sample_test_images/Potato_Early_Blight_à¤•à¤°à¤ªà¤¾_Original.jpg",
+            "Corn_Rust": "/static/sample_test_images/Corn_Common_Rust_à¤¤à¤¾à¤‚à¤¬à¥‡à¤°à¤¾_Original.jpg",
+            "Tomato_Healthy": "/static/sample_test_images/Tomato_Healthy_à¤¨à¤¿à¤°à¥‹à¤—à¥€_Original.jpg"
         };
 
         const imgUrl = sampleMap[sampleKey];
@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const lblRiskAlertMsg = document.getElementById("lblRiskAlertMsg");
             const fungalRiskBanner = document.getElementById("fungalRiskBanner");
 
-            if (wTemp) wTemp.textContent = `${data.temp}°C`;
+            if (wTemp) wTemp.textContent = `${data.temp}Â°C`;
             if (wHum) wHum.textContent = `${data.humidity}%`;
             if (wWind) wWind.textContent = "14 km/h";
 
@@ -370,24 +370,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     fungalRiskBanner.style.borderColor = "var(--neon-amber)";
                     if (lblRiskAlertHead) {
                         lblRiskAlertHead.textContent = currentLang === "mr" 
-                            ? "⚠️ 48 तासांत बुरशीजन्य रोगाचा तीव्र धोका (High Risk of Fungal Infection in 48 Hours)"
-                            : "⚠️ High Risk of Fungal Infection in 48 Hours Due to Atmospheric Humidity";
+                            ? "âš ï¸ 48 à¤¤à¤¾à¤¸à¤¾à¤‚à¤¤ à¤¬à¥à¤°à¤¶à¥€à¤œà¤¨à¥à¤¯ à¤°à¥‹à¤—à¤¾à¤šà¤¾ à¤¤à¥€à¤µà¥à¤° à¤§à¥‹à¤•à¤¾ (High Risk of Fungal Infection in 48 Hours)"
+                            : "âš ï¸ High Risk of Fungal Infection in 48 Hours Due to Atmospheric Humidity";
                     }
                     if (lblRiskAlertMsg) {
                         lblRiskAlertMsg.textContent = currentLang === "mr"
-                            ? `हवेतील अति-आर्द्रता (${data.humidity}%) आणि दमट वातावरणामुळे टोमॅटो करपा (Early Blight), लेट ब्लाइट आणि कांद्यावरील करप्याचा प्रादुर्भाव पुढील 48 तासांत वेगाने वाढू शकतो. ट्रायकोडर्मा किंवा बुरशीनाशकाची प्रतिबंधात्मक फवारणी करा.`
+                            ? `à¤¹à¤µà¥‡à¤¤à¥€à¤² à¤…à¤¤à¤¿-à¤†à¤°à¥à¤¦à¥à¤°à¤¤à¤¾ (${data.humidity}%) à¤†à¤£à¤¿ à¤¦à¤®à¤Ÿ à¤µà¤¾à¤¤à¤¾à¤µà¤°à¤£à¤¾à¤®à¥à¤³à¥‡ à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹ à¤•à¤°à¤ªà¤¾ (Early Blight), à¤²à¥‡à¤Ÿ à¤¬à¥à¤²à¤¾à¤‡à¤Ÿ à¤†à¤£à¤¿ à¤•à¤¾à¤‚à¤¦à¥à¤¯à¤¾à¤µà¤°à¥€à¤² à¤•à¤°à¤ªà¥à¤¯à¤¾à¤šà¤¾ à¤ªà¥à¤°à¤¾à¤¦à¥à¤°à¥à¤­à¤¾à¤µ à¤ªà¥à¤¢à¥€à¤² 48 à¤¤à¤¾à¤¸à¤¾à¤‚à¤¤ à¤µà¥‡à¤—à¤¾à¤¨à¥‡ à¤µà¤¾à¤¢à¥‚ à¤¶à¤•à¤¤à¥‹. à¤Ÿà¥à¤°à¤¾à¤¯à¤•à¥‹à¤¡à¤°à¥à¤®à¤¾ à¤•à¤¿à¤‚à¤µà¤¾ à¤¬à¥à¤°à¤¶à¥€à¤¨à¤¾à¤¶à¤•à¤¾à¤šà¥€ à¤ªà¥à¤°à¤¤à¤¿à¤¬à¤‚à¤§à¤¾à¤¤à¥à¤®à¤• à¤«à¤µà¤¾à¤°à¤£à¥€ à¤•à¤°à¤¾.`
                             : `Elevated atmospheric humidity (${data.humidity}%) significantly accelerates spore germination of Early Blight, Late Blight, and Rust within the next 48 hours. Apply preventative organic/chemical fungicides promptly.`;
                     }
                 } else {
                     fungalRiskBanner.style.borderColor = "var(--neon-green)";
                     if (lblRiskAlertHead) {
                         lblRiskAlertHead.textContent = currentLang === "mr"
-                            ? "✅ हवामान सुरक्षित • बुरशीचा धोका कमी (Low Climatic Risk)"
-                            : "✅ Climate Conditions Normal • Low Fungal Risk";
+                            ? "âœ… à¤¹à¤µà¤¾à¤®à¤¾à¤¨ à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤ â€¢ à¤¬à¥à¤°à¤¶à¥€à¤šà¤¾ à¤§à¥‹à¤•à¤¾ à¤•à¤®à¥€ (Low Climatic Risk)"
+                            : "âœ… Climate Conditions Normal â€¢ Low Fungal Risk";
                     }
                     if (lblRiskAlertMsg) {
                         lblRiskAlertMsg.textContent = currentLang === "mr"
-                            ? `सध्या हवेतील आर्द्रता ${data.humidity}% असून हवामान नियंत्रणात आहे. पिकाची नियमित निगा राखा.`
+                            ? `à¤¸à¤§à¥à¤¯à¤¾ à¤¹à¤µà¥‡à¤¤à¥€à¤² à¤†à¤°à¥à¤¦à¥à¤°à¤¤à¤¾ ${data.humidity}% à¤…à¤¸à¥‚à¤¨ à¤¹à¤µà¤¾à¤®à¤¾à¤¨ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£à¤¾à¤¤ à¤†à¤¹à¥‡. à¤ªà¤¿à¤•à¤¾à¤šà¥€ à¤¨à¤¿à¤¯à¤®à¤¿à¤¤ à¤¨à¤¿à¤—à¤¾ à¤°à¤¾à¤–à¤¾.`
                             : `Current relative humidity is ${data.humidity}%. Fungal sporulation threat is minimal. Continue standard crop maintenance.`;
                     }
                 }
@@ -408,40 +408,40 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================================
     const i18n = {
         mr: {
-            lblHomeGreeting: "स्मार्ट पीक संरक्षण डॅशबोर्ड",
-            lblHomeDesc: "थेट AI स्कॅनरने शेतातील रोगांचे निदान करा, सेंद्रिय व रासायनिक उपाय आणि अचूक एकरी खर्च मिळवा.",
-            lblLaunchAR: "थेट Live AR स्कॅनर सुरू करा",
-            lblWeatherAlertTitle: "हवामान व रोग अंदाज प्रणाली (48-Hour Forecast)",
-            lblTemp: "तापमान (Temp)",
-            lblHum: "आर्द्रता (Humidity)",
-            lblRain: "पाऊस शक्यता",
-            lblWind: "हवेचा वेग",
-            lblRecentScansTitle: "नुकतेच तपासलेले नमुने (Quick Real Samples)",
-            lblScanPrompt: "पिकाच्या पानावर कॅमेरा केंद्रित करा",
-            lblScanSubPrompt: "स्पष्ट उजेडात बाधित पानाचा फोटो घ्या किंवा गॅलरीमधून निवडा",
-            lblChooseFile: "गॅलरी",
-            lblResetScan: "रिसेट",
-            lblAccLabel: "मॉडेल अचूकता",
-            lblSympTitle: "पानावरील मुख्य लक्षणे (Foliar Symptoms)",
-            lblOrgCardTitle: "सेंद्रिय उपाय (ORGANIC REMEDY)",
-            lblOrgCostHead: "एकरी सेंद्रिय खर्च:",
-            lblOrgCostSub: "जैविक व पर्यावरणपूरक औषधे",
-            lblChemCardTitle: "रासायनिक उपाय (CHEMICAL REMEDY)",
-            lblChemCostHead: "एकरी रासायनिक खर्च:",
-            lblChemCostSub: "तात्काळ नियंत्रण बुरशीनाशके",
-            lblPerAcre1: "/ एकर",
-            lblPerAcre2: "/ एकर",
-            lblPrintBtn: "प्रिस्क्रिप्शन प्रिंट करा",
-            lblNewScanBtn: "दुसऱ्या पानाचे स्कॅनिंग करा",
-            lblMyCropsTitle: "माझी पिके (My Monitored Crops)",
-            lblMyCropsDesc: "सातारा आणि महाराष्ट्र हवामानानुसार निवडलेली सक्रिय पिके",
-            lblCommunityTitle: "शेतकरी समुदाय व तज्ज्ञ सल्ला (Krishi Community)",
-            lblCommunityDesc: "इतर शेतकऱ्यांचे प्रश्न, उपाय आणि कृषी विद्यापीठ तज्ज्ञ मते",
-            lblNavHome: "होम",
-            lblNavCamera: "AR कॅमेरा",
-            lblNavCrops: "माझी पिके",
-            lblNavCommunity: "समुदाय",
-            lblNavProfile: "प्रोफाइल"
+            lblHomeGreeting: "à¤¸à¥à¤®à¤¾à¤°à¥à¤Ÿ à¤ªà¥€à¤• à¤¸à¤‚à¤°à¤•à¥à¤·à¤£ à¤¡à¥…à¤¶à¤¬à¥‹à¤°à¥à¤¡",
+            lblHomeDesc: "à¤¥à¥‡à¤Ÿ AI à¤¸à¥à¤•à¥…à¤¨à¤°à¤¨à¥‡ à¤¶à¥‡à¤¤à¤¾à¤¤à¥€à¤² à¤°à¥‹à¤—à¤¾à¤‚à¤šà¥‡ à¤¨à¤¿à¤¦à¤¾à¤¨ à¤•à¤°à¤¾, à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤µ à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤‰à¤ªà¤¾à¤¯ à¤†à¤£à¤¿ à¤…à¤šà¥‚à¤• à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š à¤®à¤¿à¤³à¤µà¤¾.",
+            lblLaunchAR: "à¤¥à¥‡à¤Ÿ Live AR à¤¸à¥à¤•à¥…à¤¨à¤° à¤¸à¥à¤°à¥‚ à¤•à¤°à¤¾",
+            lblWeatherAlertTitle: "à¤¹à¤µà¤¾à¤®à¤¾à¤¨ à¤µ à¤°à¥‹à¤— à¤…à¤‚à¤¦à¤¾à¤œ à¤ªà¥à¤°à¤£à¤¾à¤²à¥€ (48-Hour Forecast)",
+            lblTemp: "à¤¤à¤¾à¤ªà¤®à¤¾à¤¨ (Temp)",
+            lblHum: "à¤†à¤°à¥à¤¦à¥à¤°à¤¤à¤¾ (Humidity)",
+            lblRain: "à¤ªà¤¾à¤Šà¤¸ à¤¶à¤•à¥à¤¯à¤¤à¤¾",
+            lblWind: "à¤¹à¤µà¥‡à¤šà¤¾ à¤µà¥‡à¤—",
+            lblRecentScansTitle: "à¤¨à¥à¤•à¤¤à¥‡à¤š à¤¤à¤ªà¤¾à¤¸à¤²à¥‡à¤²à¥‡ à¤¨à¤®à¥à¤¨à¥‡ (Quick Real Samples)",
+            lblScanPrompt: "à¤ªà¤¿à¤•à¤¾à¤šà¥à¤¯à¤¾ à¤ªà¤¾à¤¨à¤¾à¤µà¤° à¤•à¥…à¤®à¥‡à¤°à¤¾ à¤•à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¤ à¤•à¤°à¤¾",
+            lblScanSubPrompt: "à¤¸à¥à¤ªà¤·à¥à¤Ÿ à¤‰à¤œà¥‡à¤¡à¤¾à¤¤ à¤¬à¤¾à¤§à¤¿à¤¤ à¤ªà¤¾à¤¨à¤¾à¤šà¤¾ à¤«à¥‹à¤Ÿà¥‹ à¤˜à¥à¤¯à¤¾ à¤•à¤¿à¤‚à¤µà¤¾ à¤—à¥…à¤²à¤°à¥€à¤®à¤§à¥‚à¤¨ à¤¨à¤¿à¤µà¤¡à¤¾",
+            lblChooseFile: "à¤—à¥…à¤²à¤°à¥€",
+            lblResetScan: "à¤°à¤¿à¤¸à¥‡à¤Ÿ",
+            lblAccLabel: "à¤®à¥‰à¤¡à¥‡à¤² à¤…à¤šà¥‚à¤•à¤¤à¤¾",
+            lblSympTitle: "à¤ªà¤¾à¤¨à¤¾à¤µà¤°à¥€à¤² à¤®à¥à¤–à¥à¤¯ à¤²à¤•à¥à¤·à¤£à¥‡ (Foliar Symptoms)",
+            lblOrgCardTitle: "à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤‰à¤ªà¤¾à¤¯ (ORGANIC REMEDY)",
+            lblOrgCostHead: "à¤à¤•à¤°à¥€ à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤–à¤°à¥à¤š:",
+            lblOrgCostSub: "à¤œà¥ˆà¤µà¤¿à¤• à¤µ à¤ªà¤°à¥à¤¯à¤¾à¤µà¤°à¤£à¤ªà¥‚à¤°à¤• à¤”à¤·à¤§à¥‡",
+            lblChemCardTitle: "à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤‰à¤ªà¤¾à¤¯ (CHEMICAL REMEDY)",
+            lblChemCostHead: "à¤à¤•à¤°à¥€ à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤–à¤°à¥à¤š:",
+            lblChemCostSub: "à¤¤à¤¾à¤¤à¥à¤•à¤¾à¤³ à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£ à¤¬à¥à¤°à¤¶à¥€à¤¨à¤¾à¤¶à¤•à¥‡",
+            lblPerAcre1: "/ à¤à¤•à¤°",
+            lblPerAcre2: "/ à¤à¤•à¤°",
+            lblPrintBtn: "à¤ªà¥à¤°à¤¿à¤¸à¥à¤•à¥à¤°à¤¿à¤ªà¥à¤¶à¤¨ à¤ªà¥à¤°à¤¿à¤‚à¤Ÿ à¤•à¤°à¤¾",
+            lblNewScanBtn: "à¤¦à¥à¤¸à¤±à¥à¤¯à¤¾ à¤ªà¤¾à¤¨à¤¾à¤šà¥‡ à¤¸à¥à¤•à¥…à¤¨à¤¿à¤‚à¤— à¤•à¤°à¤¾",
+            lblMyCropsTitle: "à¤®à¤¾à¤à¥€ à¤ªà¤¿à¤•à¥‡ (My Monitored Crops)",
+            lblMyCropsDesc: "à¤¸à¤¾à¤¤à¤¾à¤°à¤¾ à¤†à¤£à¤¿ à¤®à¤¹à¤¾à¤°à¤¾à¤·à¥à¤Ÿà¥à¤° à¤¹à¤µà¤¾à¤®à¤¾à¤¨à¤¾à¤¨à¥à¤¸à¤¾à¤° à¤¨à¤¿à¤µà¤¡à¤²à¥‡à¤²à¥€ à¤¸à¤•à¥à¤°à¤¿à¤¯ à¤ªà¤¿à¤•à¥‡",
+            lblCommunityTitle: "à¤¶à¥‡à¤¤à¤•à¤°à¥€ à¤¸à¤®à¥à¤¦à¤¾à¤¯ à¤µ à¤¤à¤œà¥à¤œà¥à¤ž à¤¸à¤²à¥à¤²à¤¾ (Krishi Community)",
+            lblCommunityDesc: "à¤‡à¤¤à¤° à¤¶à¥‡à¤¤à¤•à¤±à¥à¤¯à¤¾à¤‚à¤šà¥‡ à¤ªà¥à¤°à¤¶à¥à¤¨, à¤‰à¤ªà¤¾à¤¯ à¤†à¤£à¤¿ à¤•à¥ƒà¤·à¥€ à¤µà¤¿à¤¦à¥à¤¯à¤¾à¤ªà¥€à¤  à¤¤à¤œà¥à¤œà¥à¤ž à¤®à¤¤à¥‡",
+            lblNavHome: "à¤¹à¥‹à¤®",
+            lblNavCamera: "AR à¤•à¥…à¤®à¥‡à¤°à¤¾",
+            lblNavCrops: "à¤®à¤¾à¤à¥€ à¤ªà¤¿à¤•à¥‡",
+            lblNavCommunity: "à¤¸à¤®à¥à¤¦à¤¾à¤¯",
+            lblNavProfile: "à¤ªà¥à¤°à¥‹à¤«à¤¾à¤‡à¤²"
         },
         en: {
             lblHomeGreeting: "Smart Crop Protection Dashboard",
@@ -508,7 +508,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================
-    // 7. PLANTIX-STYLE FARMER PROFILE MANAGEMENT & EDIT MODAL
+    // 7. FieldVision-STYLE FARMER PROFILE MANAGEMENT & EDIT MODAL
     // ==========================================================
     const modalEditProfile = document.getElementById("modalEditProfile");
     const dispFarmerName = document.getElementById("dispFarmerName");
@@ -529,13 +529,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadFarmerProfile() {
         const saved = localStorage.getItem("fieldvision_farmer_profile");
         let profile = {
-            name: "संकेत किर्दत (Sanket Kirdat)",
-            district: "सातारा (Satara)",
-            village: "कोरेगाव",
-            area: "3.5 एकर",
-            soil: "काळी कसदार (Black Soil)",
-            irrigation: "ठिबक सिंचन (Drip)",
-            crops: "टोमॅटो, बटाटा, कांदा, ऊस"
+            name: "à¤¸à¤‚à¤•à¥‡à¤¤ à¤•à¤¿à¤°à¥à¤¦à¤¤ (Sanket Kirdat)",
+            district: "à¤¸à¤¾à¤¤à¤¾à¤°à¤¾ (Satara)",
+            village: "à¤•à¥‹à¤°à¥‡à¤—à¤¾à¤µ",
+            area: "3.5 à¤à¤•à¤°",
+            soil: "à¤•à¤¾à¤³à¥€ à¤•à¤¸à¤¦à¤¾à¤° (Black Soil)",
+            irrigation: "à¤ à¤¿à¤¬à¤• à¤¸à¤¿à¤‚à¤šà¤¨ (Drip)",
+            crops: "à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹, à¤¬à¤Ÿà¤¾à¤Ÿà¤¾, à¤•à¤¾à¤‚à¤¦à¤¾, à¤Šà¤¸"
         };
         if (saved) {
             try { profile = { ...profile, ...JSON.parse(saved) }; } catch(e){}
@@ -551,7 +551,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const lblHomeGreeting = document.getElementById("lblHomeGreeting");
         if (lblHomeGreeting) {
             lblHomeGreeting.textContent = currentLang === "mr" 
-                ? `नमस्कार, ${profile.name.split(" ")[0]}! (Smart Krishi AI)` 
+                ? `à¤¨à¤®à¤¸à¥à¤•à¤¾à¤°, ${profile.name.split(" ")[0]}! (Smart Krishi AI)` 
                 : `Welcome, ${profile.name.split(" ")[0]}! (FieldVision AI)`;
         }
 
@@ -576,18 +576,18 @@ document.addEventListener("DOMContentLoaded", () => {
     window.saveFarmerProfile = function(e) {
         if (e) e.preventDefault();
         const profile = {
-            name: inpFarmerName.value.trim() || "संकेत किर्दत",
+            name: inpFarmerName.value.trim() || "à¤¸à¤‚à¤•à¥‡à¤¤ à¤•à¤¿à¤°à¥à¤¦à¤¤",
             district: inpDistrict.value,
-            village: inpVillage.value.trim() || "सातारा",
-            area: inpArea.value.trim() || "3.5 एकर",
+            village: inpVillage.value.trim() || "à¤¸à¤¾à¤¤à¤¾à¤°à¤¾",
+            area: inpArea.value.trim() || "3.5 à¤à¤•à¤°",
             soil: inpSoil.value,
             irrigation: inpIrrigation.value,
-            crops: inpCrops.value.trim() || "टोमॅटो, बटाटा, कांदा, ऊस"
+            crops: inpCrops.value.trim() || "à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹, à¤¬à¤Ÿà¤¾à¤Ÿà¤¾, à¤•à¤¾à¤‚à¤¦à¤¾, à¤Šà¤¸"
         };
         localStorage.setItem("fieldvision_farmer_profile", JSON.stringify(profile));
         loadFarmerProfile();
         closeProfileModal();
-        alert(currentLang === "mr" ? "तुमचे शेतकरी प्रोफाइल यशस्वीरित्या सेव्ह केले!" : "Farmer profile updated successfully!");
+        alert(currentLang === "mr" ? "à¤¤à¥à¤®à¤šà¥‡ à¤¶à¥‡à¤¤à¤•à¤°à¥€ à¤ªà¥à¤°à¥‹à¤«à¤¾à¤‡à¤² à¤¯à¤¶à¤¸à¥à¤µà¥€à¤°à¤¿à¤¤à¥à¤¯à¤¾ à¤¸à¥‡à¤µà¥à¤¹ à¤•à¥‡à¤²à¥‡!" : "Farmer profile updated successfully!");
     };
 
 
@@ -622,8 +622,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Read farmer details
         const saved = localStorage.getItem("fieldvision_farmer_profile");
-        let pName = "संकेत किर्दत";
-        let pDist = "सातारा (3.5 एकर)";
+        let pName = "à¤¸à¤‚à¤•à¥‡à¤¤ à¤•à¤¿à¤°à¥à¤¦à¤¤";
+        let pDist = "à¤¸à¤¾à¤¤à¤¾à¤°à¤¾ (3.5 à¤à¤•à¤°)";
         if (saved) {
             try {
                 const p = JSON.parse(saved);
@@ -643,18 +643,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const oCost = currentDiseaseData.organic_cost || 650;
             const cCost = currentDiseaseData.chemical_cost || 1250;
-            if (rxOrgCostTag) rxOrgCostTag.textContent = `एकरी खर्च: ₹ ${oCost}`;
-            if (rxChemCostTag) rxChemCostTag.textContent = `एकरी खर्च: ₹ ${cCost}`;
+            if (rxOrgCostTag) rxOrgCostTag.textContent = `à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š: â‚¹ ${oCost}`;
+            if (rxChemCostTag) rxChemCostTag.textContent = `à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š: â‚¹ ${cCost}`;
             if (rxOrgContent) rxOrgContent.innerHTML = formatPrescriptionText(currentDiseaseData.organic_remedy);
             if (rxChemContent) rxChemContent.innerHTML = formatPrescriptionText(currentDiseaseData.chemical_remedy);
         } else {
             // Default sample prescription
-            if (rxCropName) rxCropName.textContent = "टोमॅटो (Tomato)";
-            if (rxDiseaseTitle) rxDiseaseTitle.textContent = "टोमॅटो - लवकर येणारा करपा (Early Blight)";
+            if (rxCropName) rxCropName.textContent = "à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹ (Tomato)";
+            if (rxDiseaseTitle) rxDiseaseTitle.textContent = "à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹ - à¤²à¤µà¤•à¤° à¤¯à¥‡à¤£à¤¾à¤°à¤¾ à¤•à¤°à¤ªà¤¾ (Early Blight)";
             if (rxAccuracyVal) rxAccuracyVal.textContent = "96.4% AI Verified";
-            if (rxSymptomsBody) rxSymptomsBody.textContent = "पानांवर गोलाकार गडद तपकिरी वलयाकार (केंद्रीत गोल) ठिपके पडतात. जुनी पाने पिवळी पडून गळतात.";
-            if (rxOrgCostTag) rxOrgCostTag.textContent = "एकरी खर्च: ₹ 650";
-            if (rxChemCostTag) rxChemCostTag.textContent = "एकरी खर्च: ₹ 1,250";
+            if (rxSymptomsBody) rxSymptomsBody.textContent = "à¤ªà¤¾à¤¨à¤¾à¤‚à¤µà¤° à¤—à¥‹à¤²à¤¾à¤•à¤¾à¤° à¤—à¤¡à¤¦ à¤¤à¤ªà¤•à¤¿à¤°à¥€ à¤µà¤²à¤¯à¤¾à¤•à¤¾à¤° (à¤•à¥‡à¤‚à¤¦à¥à¤°à¥€à¤¤ à¤—à¥‹à¤²) à¤ à¤¿à¤ªà¤•à¥‡ à¤ªà¤¡à¤¤à¤¾à¤¤. à¤œà¥à¤¨à¥€ à¤ªà¤¾à¤¨à¥‡ à¤ªà¤¿à¤µà¤³à¥€ à¤ªà¤¡à¥‚à¤¨ à¤—à¤³à¤¤à¤¾à¤¤.";
+            if (rxOrgCostTag) rxOrgCostTag.textContent = "à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š: â‚¹ 650";
+            if (rxChemCostTag) rxChemCostTag.textContent = "à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š: â‚¹ 1,250";
         }
 
         modalPrescription.classList.remove("hidden");
@@ -697,8 +697,8 @@ document.addEventListener("DOMContentLoaded", () => {
             isListening = true;
             if (voiceWaves) voiceWaves.style.opacity = "1";
             if (voiceStatusText) voiceStatusText.textContent = currentLang === "mr" 
-                ? "🎙️ मी ऐकत आहे... (Listening in Marathi)..." 
-                : "🎙️ Listening to your query...";
+                ? "ðŸŽ™ï¸ à¤®à¥€ à¤à¤•à¤¤ à¤†à¤¹à¥‡... (Listening in Marathi)..." 
+                : "ðŸŽ™ï¸ Listening to your query...";
         };
 
         recognition.onresult = function(event) {
@@ -712,7 +712,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.warn("[Voice Assistant Error]", event.error);
             isListening = false;
             if (voiceWaves) voiceWaves.style.opacity = "0.3";
-            if (voiceStatusText) voiceStatusText.textContent = "मायक्रोफोन परवानगी तपासा किंवा खाली प्रश्न टाईप करा.";
+            if (voiceStatusText) voiceStatusText.textContent = "à¤®à¤¾à¤¯à¤•à¥à¤°à¥‹à¤«à¥‹à¤¨ à¤ªà¤°à¤µà¤¾à¤¨à¤—à¥€ à¤¤à¤ªà¤¾à¤¸à¤¾ à¤•à¤¿à¤‚à¤µà¤¾ à¤–à¤¾à¤²à¥€ à¤ªà¥à¤°à¤¶à¥à¤¨ à¤Ÿà¤¾à¤ˆà¤ª à¤•à¤°à¤¾.";
         };
 
         recognition.onend = function() {
@@ -738,7 +738,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.toggleSpeechRecognition = function() {
         if (!recognition) {
-            alert("तुमच्या ब्राउझरमध्ये व्हॉइस रेकग्निशन उपलब्ध नाही. कृपया प्रश्न खाली टाईप करा.");
+            alert("à¤¤à¥à¤®à¤šà¥à¤¯à¤¾ à¤¬à¥à¤°à¤¾à¤‰à¤à¤°à¤®à¤§à¥à¤¯à¥‡ à¤µà¥à¤¹à¥‰à¤‡à¤¸ à¤°à¥‡à¤•à¤—à¥à¤¨à¤¿à¤¶à¤¨ à¤‰à¤ªà¤²à¤¬à¥à¤§ à¤¨à¤¾à¤¹à¥€. à¤•à¥ƒà¤ªà¤¯à¤¾ à¤ªà¥à¤°à¤¶à¥à¤¨ à¤–à¤¾à¤²à¥€ à¤Ÿà¤¾à¤ˆà¤ª à¤•à¤°à¤¾.");
             return;
         }
         if (isListening) {
@@ -779,25 +779,25 @@ document.addEventListener("DOMContentLoaded", () => {
         let reply = "";
         let action = null;
 
-        if (qLower.includes("टोमॅटो") || qLower.includes("tomato") || qLower.includes("करपा") || qLower.includes("blight")) {
-            reply = "टोमॅटोवरील करपा (Early Blight) रोखण्यासाठी सेंद्रिय उपाय म्हणून ट्रायकोडर्मा व्हिरिडी ५ ग्रॅम/लिटर किंवा ५% निंबोळी अर्क फवारा. रासायनिक उपायासाठी रिडोमिल गोल्ड २ ग्रॅम प्रति लिटर किंवा मॅन्कोझेब २.५ ग्रॅम फवारा. एकरी खर्च अंदाजे ₹ ६५० ते ₹ १२५० येईल.";
-        } else if (qLower.includes("कांदा") || qLower.includes("onion") || qLower.includes("जांभळा")) {
-            reply = "कांद्यावरील जांभळा करपा (Purple Blotch) नियंत्रणासाठी ५% निंबोळी अर्क आणि नॅटिव्हो ०.७ ग्रॅम प्रति लिटर पाण्यात स्टिकर मिसळून फवारा. एकरी खर्च अंदाजे ₹ १,५०० येईल.";
-        } else if (qLower.includes("बटाटा") || qLower.includes("potato")) {
-            reply = "बटाट्यावरील उशिरा येणाऱ्या करप्यावर (Late Blight) त्वरित मेटलॅक्सिल + मॅन्कोझेब (रिडोमिल गोल्ड) २.५ ग्रॅम प्रति लिटर पाण्यात फवारा. सेंद्रिय उपायासाठी बोर्डो मिश्रण १% वापरा.";
-        } else if (qLower.includes("हवामान") || qLower.includes("weather") || qLower.includes("सातारा")) {
-            reply = "सातारा जिल्ह्यात सध्या तापमान २६.८ अंश सेल्सिअस असून आर्द्रता ८२% इतकी जास्त आहे. पुढील ४८ तासांत बुरशीजन्य रोगाचा तीव्र धोका असल्याने प्रतिबंधात्मक बुरशीनाशक फवारणी करा.";
-        } else if (qLower.includes("खर्च") || qLower.includes("cost") || qLower.includes("सेंद्रिय")) {
-            reply = "FieldVision AI नुसार सेंद्रिय औषधांचा एकरी खर्च अंदाजे ₹ ५०० ते ₹ ७५० येतो, तर रासायनिक औषधांचा खर्च ₹ १,२०० ते ₹ २,००० पर्यंत येतो.";
-        } else if (qLower.includes("स्कॅन") || qLower.includes("कॅमेरा") || qLower.includes("camera") || qLower.includes("scan")) {
-            reply = "मी Live AR कॅमेरा स्कॅनर सुरू करत आहे. कृपया पिकाच्या पानावर कॅमेरा रोखा.";
+        if (qLower.includes("à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹") || qLower.includes("tomato") || qLower.includes("à¤•à¤°à¤ªà¤¾") || qLower.includes("blight")) {
+            reply = "à¤Ÿà¥‹à¤®à¥…à¤Ÿà¥‹à¤µà¤°à¥€à¤² à¤•à¤°à¤ªà¤¾ (Early Blight) à¤°à¥‹à¤–à¤£à¥à¤¯à¤¾à¤¸à¤¾à¤ à¥€ à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤‰à¤ªà¤¾à¤¯ à¤®à¥à¤¹à¤£à¥‚à¤¨ à¤Ÿà¥à¤°à¤¾à¤¯à¤•à¥‹à¤¡à¤°à¥à¤®à¤¾ à¤µà¥à¤¹à¤¿à¤°à¤¿à¤¡à¥€ à¥« à¤—à¥à¤°à¥…à¤®/à¤²à¤¿à¤Ÿà¤° à¤•à¤¿à¤‚à¤µà¤¾ à¥«% à¤¨à¤¿à¤‚à¤¬à¥‹à¤³à¥€ à¤…à¤°à¥à¤• à¤«à¤µà¤¾à¤°à¤¾. à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤‰à¤ªà¤¾à¤¯à¤¾à¤¸à¤¾à¤ à¥€ à¤°à¤¿à¤¡à¥‹à¤®à¤¿à¤² à¤—à¥‹à¤²à¥à¤¡ à¥¨ à¤—à¥à¤°à¥…à¤® à¤ªà¥à¤°à¤¤à¤¿ à¤²à¤¿à¤Ÿà¤° à¤•à¤¿à¤‚à¤µà¤¾ à¤®à¥…à¤¨à¥à¤•à¥‹à¤à¥‡à¤¬ à¥¨.à¥« à¤—à¥à¤°à¥…à¤® à¤«à¤µà¤¾à¤°à¤¾. à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š à¤…à¤‚à¤¦à¤¾à¤œà¥‡ â‚¹ à¥¬à¥«à¥¦ à¤¤à¥‡ â‚¹ à¥§à¥¨à¥«à¥¦ à¤¯à¥‡à¤ˆà¤².";
+        } else if (qLower.includes("à¤•à¤¾à¤‚à¤¦à¤¾") || qLower.includes("onion") || qLower.includes("à¤œà¤¾à¤‚à¤­à¤³à¤¾")) {
+            reply = "à¤•à¤¾à¤‚à¤¦à¥à¤¯à¤¾à¤µà¤°à¥€à¤² à¤œà¤¾à¤‚à¤­à¤³à¤¾ à¤•à¤°à¤ªà¤¾ (Purple Blotch) à¤¨à¤¿à¤¯à¤‚à¤¤à¥à¤°à¤£à¤¾à¤¸à¤¾à¤ à¥€ à¥«% à¤¨à¤¿à¤‚à¤¬à¥‹à¤³à¥€ à¤…à¤°à¥à¤• à¤†à¤£à¤¿ à¤¨à¥…à¤Ÿà¤¿à¤µà¥à¤¹à¥‹ à¥¦.à¥­ à¤—à¥à¤°à¥…à¤® à¤ªà¥à¤°à¤¤à¤¿ à¤²à¤¿à¤Ÿà¤° à¤ªà¤¾à¤£à¥à¤¯à¤¾à¤¤ à¤¸à¥à¤Ÿà¤¿à¤•à¤° à¤®à¤¿à¤¸à¤³à¥‚à¤¨ à¤«à¤µà¤¾à¤°à¤¾. à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š à¤…à¤‚à¤¦à¤¾à¤œà¥‡ â‚¹ à¥§,à¥«à¥¦à¥¦ à¤¯à¥‡à¤ˆà¤².";
+        } else if (qLower.includes("à¤¬à¤Ÿà¤¾à¤Ÿà¤¾") || qLower.includes("potato")) {
+            reply = "à¤¬à¤Ÿà¤¾à¤Ÿà¥à¤¯à¤¾à¤µà¤°à¥€à¤² à¤‰à¤¶à¤¿à¤°à¤¾ à¤¯à¥‡à¤£à¤¾à¤±à¥à¤¯à¤¾ à¤•à¤°à¤ªà¥à¤¯à¤¾à¤µà¤° (Late Blight) à¤¤à¥à¤µà¤°à¤¿à¤¤ à¤®à¥‡à¤Ÿà¤²à¥…à¤•à¥à¤¸à¤¿à¤² + à¤®à¥…à¤¨à¥à¤•à¥‹à¤à¥‡à¤¬ (à¤°à¤¿à¤¡à¥‹à¤®à¤¿à¤² à¤—à¥‹à¤²à¥à¤¡) à¥¨.à¥« à¤—à¥à¤°à¥…à¤® à¤ªà¥à¤°à¤¤à¤¿ à¤²à¤¿à¤Ÿà¤° à¤ªà¤¾à¤£à¥à¤¯à¤¾à¤¤ à¤«à¤µà¤¾à¤°à¤¾. à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤‰à¤ªà¤¾à¤¯à¤¾à¤¸à¤¾à¤ à¥€ à¤¬à¥‹à¤°à¥à¤¡à¥‹ à¤®à¤¿à¤¶à¥à¤°à¤£ à¥§% à¤µà¤¾à¤ªà¤°à¤¾.";
+        } else if (qLower.includes("à¤¹à¤µà¤¾à¤®à¤¾à¤¨") || qLower.includes("weather") || qLower.includes("à¤¸à¤¾à¤¤à¤¾à¤°à¤¾")) {
+            reply = "à¤¸à¤¾à¤¤à¤¾à¤°à¤¾ à¤œà¤¿à¤²à¥à¤¹à¥à¤¯à¤¾à¤¤ à¤¸à¤§à¥à¤¯à¤¾ à¤¤à¤¾à¤ªà¤®à¤¾à¤¨ à¥¨à¥¬.à¥® à¤…à¤‚à¤¶ à¤¸à¥‡à¤²à¥à¤¸à¤¿à¤…à¤¸ à¤…à¤¸à¥‚à¤¨ à¤†à¤°à¥à¤¦à¥à¤°à¤¤à¤¾ à¥®à¥¨% à¤‡à¤¤à¤•à¥€ à¤œà¤¾à¤¸à¥à¤¤ à¤†à¤¹à¥‡. à¤ªà¥à¤¢à¥€à¤² à¥ªà¥® à¤¤à¤¾à¤¸à¤¾à¤‚à¤¤ à¤¬à¥à¤°à¤¶à¥€à¤œà¤¨à¥à¤¯ à¤°à¥‹à¤—à¤¾à¤šà¤¾ à¤¤à¥€à¤µà¥à¤° à¤§à¥‹à¤•à¤¾ à¤…à¤¸à¤²à¥à¤¯à¤¾à¤¨à¥‡ à¤ªà¥à¤°à¤¤à¤¿à¤¬à¤‚à¤§à¤¾à¤¤à¥à¤®à¤• à¤¬à¥à¤°à¤¶à¥€à¤¨à¤¾à¤¶à¤• à¤«à¤µà¤¾à¤°à¤£à¥€ à¤•à¤°à¤¾.";
+        } else if (qLower.includes("à¤–à¤°à¥à¤š") || qLower.includes("cost") || qLower.includes("à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯")) {
+            reply = "FieldVision AI à¤¨à¥à¤¸à¤¾à¤° à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤”à¤·à¤§à¤¾à¤‚à¤šà¤¾ à¤à¤•à¤°à¥€ à¤–à¤°à¥à¤š à¤…à¤‚à¤¦à¤¾à¤œà¥‡ â‚¹ à¥«à¥¦à¥¦ à¤¤à¥‡ â‚¹ à¥­à¥«à¥¦ à¤¯à¥‡à¤¤à¥‹, à¤¤à¤° à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤”à¤·à¤§à¤¾à¤‚à¤šà¤¾ à¤–à¤°à¥à¤š â‚¹ à¥§,à¥¨à¥¦à¥¦ à¤¤à¥‡ â‚¹ à¥¨,à¥¦à¥¦à¥¦ à¤ªà¤°à¥à¤¯à¤‚à¤¤ à¤¯à¥‡à¤¤à¥‹.";
+        } else if (qLower.includes("à¤¸à¥à¤•à¥…à¤¨") || qLower.includes("à¤•à¥…à¤®à¥‡à¤°à¤¾") || qLower.includes("camera") || qLower.includes("scan")) {
+            reply = "à¤®à¥€ Live AR à¤•à¥…à¤®à¥‡à¤°à¤¾ à¤¸à¥à¤•à¥…à¤¨à¤° à¤¸à¥à¤°à¥‚ à¤•à¤°à¤¤ à¤†à¤¹à¥‡. à¤•à¥ƒà¤ªà¤¯à¤¾ à¤ªà¤¿à¤•à¤¾à¤šà¥à¤¯à¤¾ à¤ªà¤¾à¤¨à¤¾à¤µà¤° à¤•à¥…à¤®à¥‡à¤°à¤¾ à¤°à¥‹à¤–à¤¾.";
             action = () => switchTab("camera");
         } else {
-            reply = "FieldVision AI प्रणालीमध्ये आपले स्वागत आहे! मी पिकांचे रोग, सेंद्रिय उपाय, रासायनिक फवारणी व हवामानाबद्दल मार्गदर्शन करू शकतो. आपण पानाचा फोटो काढून थेट स्कॅनिंग देखील करू शकता.";
+            reply = "FieldVision AI à¤ªà¥à¤°à¤£à¤¾à¤²à¥€à¤®à¤§à¥à¤¯à¥‡ à¤†à¤ªà¤²à¥‡ à¤¸à¥à¤µà¤¾à¤—à¤¤ à¤†à¤¹à¥‡! à¤®à¥€ à¤ªà¤¿à¤•à¤¾à¤‚à¤šà¥‡ à¤°à¥‹à¤—, à¤¸à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¯ à¤‰à¤ªà¤¾à¤¯, à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤«à¤µà¤¾à¤°à¤£à¥€ à¤µ à¤¹à¤µà¤¾à¤®à¤¾à¤¨à¤¾à¤¬à¤¦à¥à¤¦à¤² à¤®à¤¾à¤°à¥à¤—à¤¦à¤°à¥à¤¶à¤¨ à¤•à¤°à¥‚ à¤¶à¤•à¤¤à¥‹. à¤†à¤ªà¤£ à¤ªà¤¾à¤¨à¤¾à¤šà¤¾ à¤«à¥‹à¤Ÿà¥‹ à¤•à¤¾à¤¢à¥‚à¤¨ à¤¥à¥‡à¤Ÿ à¤¸à¥à¤•à¥…à¤¨à¤¿à¤‚à¤— à¤¦à¥‡à¤–à¥€à¤² à¤•à¤°à¥‚ à¤¶à¤•à¤¤à¤¾.";
         }
 
         if (voiceReplyText) voiceReplyText.textContent = reply;
-        if (voiceStatusText) voiceStatusText.textContent = "उत्तर तयार आहे.";
+        if (voiceStatusText) voiceStatusText.textContent = "à¤‰à¤¤à¥à¤¤à¤° à¤¤à¤¯à¤¾à¤° à¤†à¤¹à¥‡.";
 
         // Speak aloud via SpeechSynthesis
         speakResponseAloud(reply);

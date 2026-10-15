@@ -1,6 +1,6 @@
-/* ==========================================================
+﻿/* ==========================================================
    FieldVision AI - Futuristic Cyber Dark Glassmorphism CSS
-   Project: FieldVision AI (Next-Gen Plantix App)
+   Project: FieldVision AI (Next-Gen FieldVision App)
    Developer: Sanket Kirdat (Department of AI & Data Science)
    ========================================================== */
 
@@ -1393,7 +1393,7 @@ html, body {
 }
 
 /* ==========================================================
-   PLANTIX-STYLE BOTTOM NAVIGATION BAR (5 ICONS)
+   FieldVision-STYLE BOTTOM NAVIGATION BAR (5 ICONS)
    ========================================================== */
 .bottom-nav-bar {
     position: fixed;
@@ -1599,7 +1599,7 @@ html, body {
     vertical-align: middle;
 }
 
-/* 2. Plantix Farmer Profile Card */
+/* 2. FieldVision Farmer Profile Card */
 .profile-farmer-card {
     padding: 22px;
     margin-bottom: 20px;
