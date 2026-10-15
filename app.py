@@ -252,9 +252,10 @@ def predict():
 
 if __name__ == "__main__":
     print("=" * 65)
-    print("🌾 CROP DISEASE AI - FLASK SERVER STARTING 🌾")
+    print("🌾 CROP DISEASE AI - CYBERPUNK SERVER ACTIVE 🌾")
     print(f"📡 Database Mode: {db.mode}")
-    print(f"🤖 Loaded Model: {'Active' if ai_model is not None else 'Fallback Active'}")
-    print("🌐 Dashboard URL: http://127.0.0.1:5000")
+    print("⚡ Developer: Sanket Kirdat")
+    print("🌐 Laptop Local URL:  http://localhost:5000")
+    print("📱 Mobile Network URL: http://10.254.215.116:5000")
     print("=" * 65)
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    app.run(debug=False, host="0.0.0.0", port=5000)

@@ -826,3 +826,167 @@ body.cyber-dark {
     display: none !important;
 }
 
+/* ==========================================================
+   SMARTPHONE & MOBILE OPTIMIZATIONS (< 768px)
+   ========================================================== */
+@media (max-width: 768px) {
+    .glass-header {
+        padding: 12px 16px;
+    }
+    .header-container {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+    .logo-group {
+        justify-content: center;
+    }
+    .logo-title {
+        font-size: 1.25rem;
+    }
+    .logo-subtitle {
+        display: none;
+    }
+    .header-controls {
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+    }
+    .lang-switch-box {
+        padding: 2px;
+    }
+    .lang-btn {
+        padding: 3px 10px;
+        font-size: 0.75rem;
+    }
+    .dev-badge-corner {
+        padding: 3px 8px;
+        font-size: 0.72rem;
+    }
+    .db-pill {
+        display: none;
+    }
+
+    /* Main Container Padding */
+    .main-wrapper {
+        margin: 12px auto;
+        padding: 0 12px;
+    }
+
+    /* Weather Ribbon */
+    .weather-ribbon {
+        padding: 14px 16px;
+        margin-bottom: 16px;
+    }
+    .weather-info-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+    .weather-icon-pulse {
+        font-size: 28px;
+    }
+    .weather-metrics {
+        gap: 14px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .metric-value {
+        font-size: 1rem;
+    }
+    .weather-alert-box {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Upload & Laser Zone */
+    .drop-zone {
+        margin: 14px 12px;
+        min-height: 220px;
+    }
+    .upload-icon-circle {
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .drop-placeholder h3 {
+        font-size: 0.95rem;
+    }
+    .file-tips {
+        font-size: 0.78rem;
+        margin-bottom: 12px;
+    }
+    .btn-cyber-outline {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        flex: 1;
+        min-width: 130px;
+    }
+    .btn-cyber-primary {
+        width: calc(100% - 24px);
+        margin: 0 12px;
+        padding: 12px 18px;
+        font-size: 0.95rem;
+    }
+    .quick-samples-bar {
+        margin: 14px 12px 0;
+    }
+    .chip-btn {
+        padding: 4px 8px;
+        font-size: 0.72rem;
+    }
+
+    /* Results Card */
+    .active-results {
+        padding: 14px 12px;
+    }
+    .result-summary-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+    .confidence-circle {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+    }
+    .conf-value {
+        font-size: 1.3rem;
+    }
+    .disease-heading {
+        font-size: 1.15rem;
+    }
+
+    /* Tabs */
+    .cyber-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 6px;
+        gap: 4px;
+    }
+    .tab-btn {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+
+    .cost-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 14px;
+    }
+    .cost-amount {
+        font-size: 1.35rem;
+    }
+
+    .result-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
