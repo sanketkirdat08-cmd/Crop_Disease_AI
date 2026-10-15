@@ -1580,3 +1580,743 @@ html, body {
         flex-direction: column;
     }
 }
+
+/* ==========================================================
+   ADVANCED ADDITIONS: LOGO, PROFILE EDIT, VOICE ASSISTANT & RX
+   ========================================================== */
+
+/* 1. Vector Logo in App Header */
+.brand-logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+.mini-logo {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+/* 2. Plantix Farmer Profile Card */
+.profile-farmer-card {
+    padding: 22px;
+    margin-bottom: 20px;
+    border-color: rgba(0, 255, 136, 0.35);
+    background: linear-gradient(135deg, rgba(14, 22, 42, 0.9) 0%, rgba(10, 16, 32, 0.8) 100%);
+}
+
+.farmer-header-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.farmer-avatar-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+    color: #040814;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 0 20px var(--neon-green-glow);
+    flex-shrink: 0;
+}
+
+.farmer-meta {
+    flex: 1;
+}
+
+.farmer-meta h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.badge-farmer {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: rgba(0, 243, 255, 0.12);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.farmer-sub {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.btn-edit-pencil {
+    background: rgba(0, 243, 255, 0.12);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-edit-pencil:hover {
+    background: var(--neon-blue);
+    color: #040814;
+    box-shadow: 0 0 15px var(--neon-blue-glow);
+}
+
+.farmer-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.farmer-stat-box {
+    background: rgba(10, 15, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 10px 14px;
+}
+
+.f-label {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.f-val {
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.farmer-actions-row {
+    margin-top: 10px;
+}
+
+.btn-edit-full {
+    width: 100%;
+}
+
+/* 3. Modal Overlays & Form Styling */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 7, 16, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: fadeInModal 0.25s ease;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-dialog {
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-header h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.btn-close-modal:hover {
+    color: #ffffff;
+}
+
+.cyber-input {
+    width: 100%;
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-family: var(--font-marathi);
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.cyber-input:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 12px var(--neon-blue-glow);
+}
+
+.cyber-input option {
+    background: #070a13;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-cancel-glass {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-secondary);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-submit-neon {
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+    border: none;
+    color: #040814;
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 0 18px var(--neon-green-glow);
+}
+
+/* 4. Google Assistant Floating Widget */
+.floating-voice-widget {
+    position: fixed;
+    bottom: 84px;
+    right: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.voice-orb-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00f3ff, #00ff88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #040814;
+    font-size: 22px;
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.6);
+    transition: transform 0.25s ease;
+}
+
+.floating-voice-widget:hover .voice-orb-btn {
+    transform: scale(1.1);
+}
+
+.voice-pulse-ring {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--neon-blue);
+    animation: voiceRingPulse 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes voiceRingPulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.voice-orb-label {
+    background: rgba(7, 10, 19, 0.9);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .voice-orb-label {
+        display: block;
+    }
+}
+
+/* Voice Assistant Dialog */
+.voice-dialog {
+    max-width: 500px;
+}
+
+.voice-waves-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    height: 44px;
+    margin: 16px 0;
+}
+
+.wave-bar {
+    width: 5px;
+    height: 12px;
+    background: var(--neon-blue);
+    border-radius: 10px;
+    animation: soundWave 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(2) { animation-delay: 0.2s; background: var(--neon-green); height: 24px; }
+.wave-bar:nth-child(3) { animation-delay: 0.4s; background: #ffffff; height: 36px; }
+.wave-bar:nth-child(4) { animation-delay: 0.6s; background: var(--neon-green); height: 22px; }
+.wave-bar:nth-child(5) { animation-delay: 0.8s; background: var(--neon-blue); height: 14px; }
+
+@keyframes soundWave {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1.4); }
+}
+
+.voice-status-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+}
+
+.voice-user-query {
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+    color: #ffffff;
+}
+
+.voice-ai-reply {
+    background: rgba(0, 255, 136, 0.08);
+    border: 1px solid var(--neon-green);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #f0f4fc;
+}
+
+.ai-reply-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--neon-green);
+    margin-bottom: 6px;
+}
+
+.voice-quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.chip-voice-btn {
+    background: rgba(14, 22, 42, 0.8);
+    border: 1px solid rgba(0, 243, 255, 0.25);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chip-voice-btn:hover {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+.voice-action-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-mic-trigger {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+    border: none;
+    color: #040814;
+    font-size: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 0 15px var(--neon-blue-glow);
+}
+
+.voice-type-input {
+    flex: 1;
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 20px;
+    padding: 10px 16px;
+    color: #fff;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.btn-voice-send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 243, 255, 0.15);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    cursor: pointer;
+}
+
+/* 5. Professional Digital Agricultural Prescription (Krishi Rx Slip) */
+.prescription-dialog {
+    max-width: 720px;
+    background: #ffffff !important;
+    color: #1a1e29 !important;
+    border: 2px solid #00b862;
+    padding: 0;
+}
+
+.rx-modal-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #070a13;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-print-rx {
+    background: linear-gradient(135deg, #00ff88, #00d4ff);
+    color: #040814;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rx-slip-sheet {
+    padding: 28px 32px;
+    background: #ffffff;
+    color: #1a1e29;
+    font-family: 'Mukta', 'Inter', sans-serif;
+}
+
+.rx-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rx-brand-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.rx-logo {
+    width: 54px;
+    height: 54px;
+}
+
+.rx-brand-left h2 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: #0a5c36;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.rx-sub {
+    font-size: 0.82rem;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.rx-reg {
+    font-size: 0.72rem;
+    color: #718096;
+}
+
+.rx-stamp-right {
+    text-align: right;
+}
+
+.rx-badge {
+    background: #0a5c36;
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.rx-id {
+    display: block;
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: #4a5568;
+    margin-top: 4px;
+}
+
+.rx-divider {
+    height: 3px;
+    background: linear-gradient(90deg, #0a5c36, #00a8ff);
+    margin: 16px 0 14px;
+    border-radius: 2px;
+}
+
+.rx-divider-thin {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 14px 0;
+}
+
+.rx-farmer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    font-size: 0.85rem;
+    color: #2d3748;
+}
+
+.rx-farmer-grid span {
+    color: #718096;
+}
+
+.rx-disease-name {
+    color: #c53030;
+    font-size: 0.92rem;
+}
+
+.rx-acc-val {
+    color: #0a5c36;
+    font-family: monospace;
+}
+
+.rx-section {
+    margin-top: 12px;
+}
+
+.rx-section-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #0a5c36;
+    margin-bottom: 6px;
+}
+
+.rx-body {
+    font-size: 0.85rem;
+    color: #4a5568;
+    line-height: 1.5;
+}
+
+.rx-treatments-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.rx-card {
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+.rx-organic {
+    background: #f0fff4;
+    border: 1.5px solid #38a169;
+}
+
+.rx-chemical {
+    background: #ebf8ff;
+    border: 1.5px solid #3182ce;
+}
+
+.rx-card-head {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+}
+
+.rx-organic .rx-card-head { color: #22543d; }
+.rx-chemical .rx-card-head { color: #2a4365; }
+
+.rx-cost-tag {
+    font-size: 0.78rem;
+    font-weight: 900;
+}
+
+.rx-precautions-box {
+    margin-top: 16px;
+    background: #fffaf0;
+    border: 1px solid #dd6b20;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    color: #744210;
+    line-height: 1.45;
+}
+
+.rx-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.rx-seal {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px dashed #0a5c36;
+    color: #0a5c36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    transform: rotate(-12deg);
+}
+
+.rx-sign-box {
+    text-align: right;
+}
+
+.signature-line {
+    font-family: 'Brush Script MT', cursive, sans-serif;
+    font-size: 1.5rem;
+    color: #1a365d;
+    margin-bottom: 2px;
+}
+
+.sign-name {
+    font-size: 0.85rem;
+    color: #1a202c;
+}
+
+.sign-role {
+    font-size: 0.75rem;
+    color: #4a5568;
+}
+
+.sign-dept {
+    font-size: 0.7rem;
+    color: #718096;
+}
+
+/* Print Only Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printableRxSheet, #printableRxSheet * {
+        visibility: visible;
+    }
+    #printableRxSheet {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+    }
+    .no-print {
+        display: none !important;
+    }
+}
+

@@ -253,11 +253,20 @@ def predict():
 
 
 if __name__ == "__main__":
+    cert_path = os.path.join(app.root_path, "cert.pem")
+    key_path = os.path.join(app.root_path, "key.pem")
+    use_ssl = os.path.exists(cert_path) and os.path.exists(key_path) and ("--no-ssl" not in sys.argv)
+    
+    protocol = "https" if use_ssl else "http"
+    ssl_ctx = (cert_path, key_path) if use_ssl else None
+
     print("=" * 65)
-    print("🌾 CROP DISEASE AI - CYBERPUNK SERVER ACTIVE 🌾")
+    print("🌾 FIELDVISION AI - SECURE CYBERPUNK SERVER ACTIVE 🌾")
     print(f"📡 Database Mode: {db.mode}")
-    print("⚡ Developer: Sanket Kirdat")
-    print("🌐 Laptop Local URL:  http://localhost:5000")
-    print("📱 Mobile Network URL: http://10.254.215.116:5000")
+    print("⚡ Developer: Sanket Kirdat (Lead AI & Data Science)")
+    print(f"🔒 Security: {'HTTPS (SSL Encrypted - Safe Camera WebRTC)' if use_ssl else 'HTTP'}")
+    print(f"🌐 Laptop Local URL:   {protocol}://localhost:5000")
+    print(f"📱 Mobile Network URL: {protocol}://10.254.215.116:5000")
     print("=" * 65)
-    app.run(debug=False, host="0.0.0.0", port=5000)
+
+    app.run(debug=False, host="0.0.0.0", port=5000, ssl_context=ssl_ctx)

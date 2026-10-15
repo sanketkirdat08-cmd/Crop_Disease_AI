@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.25" />
+      <stop offset="40%" stop-color="#00ff88" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#070a13" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Neon Green Gradient -->
+    <linearGradient id="neonGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff88" />
+      <stop offset="100%" stop-color="#00b862" />
+    </linearGradient>
+
+    <!-- Neon Blue/Cyan Gradient -->
+    <linearGradient id="neonCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f3ff" />
+      <stop offset="100%" stop-color="#0077ff" />
+    </linearGradient>
+
+    <!-- Circuit Stroke Gradient -->
+    <linearGradient id="circuitGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f3ff" />
+      <stop offset="50%" stop-color="#00ff88" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="neonGlowCyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="neonGlowGreen" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Ambient Background Glow -->
+  <circle cx="250" cy="250" r="230" fill="url(#bgGlow)" />
+
+  <!-- Outer Tech Radar Ring (Scanner) -->
+  <circle cx="250" cy="250" r="210" fill="none" stroke="#00f3ff" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="8 6" />
+  <circle cx="250" cy="250" r="195" fill="none" stroke="#00ff88" stroke-width="3" stroke-opacity="0.6" filter="url(#neonGlowCyan)" />
+  <circle cx="250" cy="250" r="180" fill="none" stroke="#00f3ff" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="24 12" />
+
+  <!-- Radar Angle Markers / Brackets -->
+  <path d="M 60 250 L 80 250 M 440 250 L 420 250 M 250 60 L 250 80 M 250 440 L 250 420" stroke="#00f3ff" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Corner HUD Targeting Reticles -->
+  <path d="M 110 140 L 110 110 L 140 110" fill="none" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#neonGlowGreen)" />
+  <path d="M 390 140 L 390 110 L 360 110" fill="none" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#neonGlowGreen)" />
+  <path d="M 110 360 L 110 390 L 140 390" fill="none" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#neonGlowGreen)" />
+  <path d="M 390 360 L 390 390 L 360 390" fill="none" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#neonGlowGreen)" />
+
+  <!-- Central Futuristic Cyber Leaf -->
+  <path d="M 250 90 C 340 120 370 230 310 330 C 270 390 250 410 250 410 C 250 410 230 390 190 330 C 130 230 160 120 250 90 Z" 
+        fill="none" 
+        stroke="url(#neonGreenGrad)" 
+        stroke-width="5" 
+        stroke-linejoin="round"
+        filter="url(#neonGlowGreen)" />
+
+  <path d="M 250 90 C 320 135 345 220 300 310 C 265 365 250 405 250 405 C 250 405 235 365 200 310 C 155 220 180 135 250 90 Z" 
+        fill="rgba(0, 255, 136, 0.08)" />
+
+  <!-- Central Leaf Neural Spine (Circuit Trace) -->
+  <path d="M 250 110 L 250 390" stroke="url(#circuitGrad)" stroke-width="4" stroke-linecap="round" filter="url(#neonGlowCyan)" />
+
+  <!-- Branching Circuit Veins with Neural Data Nodes -->
+  <!-- Vein 1 Right -->
+  <path d="M 250 180 L 295 155 L 320 160" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="320" cy="160" r="5" fill="#00ff88" filter="url(#neonGlowGreen)" />
+
+  <!-- Vein 1 Left -->
+  <path d="M 250 200 L 205 175 L 180 180" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="180" cy="180" r="5" fill="#00f3ff" filter="url(#neonGlowCyan)" />
+
+  <!-- Vein 2 Right -->
+  <path d="M 250 240 L 305 220 L 330 230" fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="330" cy="230" r="5.5" fill="#ffffff" filter="url(#neonGlowCyan)" />
+
+  <!-- Vein 2 Left -->
+  <path d="M 250 260 L 195 240 L 170 250" fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="170" cy="250" r="5.5" fill="#00ff88" filter="url(#neonGlowGreen)" />
+
+  <!-- Vein 3 Right -->
+  <path d="M 250 300 L 290 290 L 310 305" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="310" cy="305" r="4.5" fill="#00f3ff" filter="url(#neonGlowCyan)" />
+
+  <!-- Vein 3 Left -->
+  <path d="M 250 320 L 210 310 L 190 325" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="190" cy="325" r="4.5" fill="#00ff88" filter="url(#neonGlowGreen)" />
+
+  <!-- Central AI Core Node -->
+  <circle cx="250" cy="240" r="14" fill="#070a13" stroke="#00f3ff" stroke-width="3" filter="url(#neonGlowCyan)" />
+  <circle cx="250" cy="240" r="6" fill="#00ff88" filter="url(#neonGlowGreen)" />
+
+  <!-- Pulsing Scanning Beam Across Leaf Center -->
+  <line x1="160" y1="240" x2="340" y2="240" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 3" stroke-opacity="0.8" />
+
+  <!-- Satellite / AI Wave Rings at Leaf Tip -->
+  <path d="M 230 75 A 25 25 0 0 1 270 75" fill="none" stroke="#00f3ff" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.9" filter="url(#neonGlowCyan)" />
+  <path d="M 220 60 A 35 35 0 0 1 280 60" fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.7" filter="url(#neonGlowGreen)" />
+  <path d="M 210 45 A 45 45 0 0 1 290 45" fill="none" stroke="#00f3ff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5" />
+</svg>
+

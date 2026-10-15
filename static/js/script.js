@@ -507,10 +507,329 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    if (btnLangMr) btnLangMr.addEventListener("click", () => setLanguage("mr"));
-    if (btnLangEn) btnLangEn.addEventListener("click", () => setLanguage("en"));
+    // ==========================================================
+    // 7. PLANTIX-STYLE FARMER PROFILE MANAGEMENT & EDIT MODAL
+    // ==========================================================
+    const modalEditProfile = document.getElementById("modalEditProfile");
+    const dispFarmerName = document.getElementById("dispFarmerName");
+    const dispFarmerLocation = document.getElementById("dispFarmerLocation");
+    const dispFarmerArea = document.getElementById("dispFarmerArea");
+    const dispFarmerSoil = document.getElementById("dispFarmerSoil");
+    const dispFarmerIrrig = document.getElementById("dispFarmerIrrig");
+    const dispFarmerCrops = document.getElementById("dispFarmerCrops");
+
+    const inpFarmerName = document.getElementById("inpFarmerName");
+    const inpDistrict = document.getElementById("inpDistrict");
+    const inpVillage = document.getElementById("inpVillage");
+    const inpArea = document.getElementById("inpArea");
+    const inpSoil = document.getElementById("inpSoil");
+    const inpIrrigation = document.getElementById("inpIrrigation");
+    const inpCrops = document.getElementById("inpCrops");
+
+    function loadFarmerProfile() {
+        const saved = localStorage.getItem("fieldvision_farmer_profile");
+        let profile = {
+            name: "संकेत किर्दत (Sanket Kirdat)",
+            district: "सातारा (Satara)",
+            village: "कोरेगाव",
+            area: "3.5 एकर",
+            soil: "काळी कसदार (Black Soil)",
+            irrigation: "ठिबक सिंचन (Drip)",
+            crops: "टोमॅटो, बटाटा, कांदा, ऊस"
+        };
+        if (saved) {
+            try { profile = { ...profile, ...JSON.parse(saved) }; } catch(e){}
+        }
+
+        if (dispFarmerName) dispFarmerName.textContent = profile.name;
+        if (dispFarmerLocation) dispFarmerLocation.textContent = `${profile.village}, ${profile.district}`;
+        if (dispFarmerArea) dispFarmerArea.textContent = profile.area;
+        if (dispFarmerSoil) dispFarmerSoil.textContent = profile.soil;
+        if (dispFarmerIrrig) dispFarmerIrrig.textContent = profile.irrigation;
+        if (dispFarmerCrops) dispFarmerCrops.textContent = profile.crops;
+
+        const lblHomeGreeting = document.getElementById("lblHomeGreeting");
+        if (lblHomeGreeting) {
+            lblHomeGreeting.textContent = currentLang === "mr" 
+                ? `नमस्कार, ${profile.name.split(" ")[0]}! (Smart Krishi AI)` 
+                : `Welcome, ${profile.name.split(" ")[0]}! (FieldVision AI)`;
+        }
+
+        // Prepopulate form inputs
+        if (inpFarmerName) inpFarmerName.value = profile.name;
+        if (inpDistrict) inpDistrict.value = profile.district;
+        if (inpVillage) inpVillage.value = profile.village;
+        if (inpArea) inpArea.value = profile.area;
+        if (inpSoil) inpSoil.value = profile.soil;
+        if (inpIrrigation) inpIrrigation.value = profile.irrigation;
+        if (inpCrops) inpCrops.value = profile.crops;
+    }
+
+    window.openProfileModal = function() {
+        if (modalEditProfile) modalEditProfile.classList.remove("hidden");
+    };
+
+    window.closeProfileModal = function() {
+        if (modalEditProfile) modalEditProfile.classList.add("hidden");
+    };
+
+    window.saveFarmerProfile = function(e) {
+        if (e) e.preventDefault();
+        const profile = {
+            name: inpFarmerName.value.trim() || "संकेत किर्दत",
+            district: inpDistrict.value,
+            village: inpVillage.value.trim() || "सातारा",
+            area: inpArea.value.trim() || "3.5 एकर",
+            soil: inpSoil.value,
+            irrigation: inpIrrigation.value,
+            crops: inpCrops.value.trim() || "टोमॅटो, बटाटा, कांदा, ऊस"
+        };
+        localStorage.setItem("fieldvision_farmer_profile", JSON.stringify(profile));
+        loadFarmerProfile();
+        closeProfileModal();
+        alert(currentLang === "mr" ? "तुमचे शेतकरी प्रोफाइल यशस्वीरित्या सेव्ह केले!" : "Farmer profile updated successfully!");
+    };
+
+
+    // ==========================================================
+    // 8. DIGITAL AGRICULTURAL PRESCRIPTION (KRISHI RX SLIP)
+    // ==========================================================
+    const modalPrescription = document.getElementById("modalPrescription");
+    const rxSlipNo = document.getElementById("rxSlipNo");
+    const rxFarmerName = document.getElementById("rxFarmerName");
+    const rxDate = document.getElementById("rxDate");
+    const rxDistrict = document.getElementById("rxDistrict");
+    const rxCropName = document.getElementById("rxCropName");
+    const rxDiseaseTitle = document.getElementById("rxDiseaseTitle");
+    const rxAccuracyVal = document.getElementById("rxAccuracyVal");
+    const rxSymptomsBody = document.getElementById("rxSymptomsBody");
+    const rxOrgCostTag = document.getElementById("rxOrgCostTag");
+    const rxOrgContent = document.getElementById("rxOrgContent");
+    const rxChemCostTag = document.getElementById("rxChemCostTag");
+    const rxChemContent = document.getElementById("rxChemContent");
+
+    window.openPrescriptionModal = function() {
+        if (!modalPrescription) return;
+
+        // Random verified slip number
+        const slipId = "RX-2026-SAT-" + Math.floor(1000 + Math.random() * 9000);
+        if (rxSlipNo) rxSlipNo.textContent = slipId;
+
+        // Current Date
+        const today = new Date();
+        const dateStr = today.toLocaleDateString("en-IN", { day: "2-digit", month: "2-digit", year: "numeric" });
+        if (rxDate) rxDate.textContent = dateStr;
+
+        // Read farmer details
+        const saved = localStorage.getItem("fieldvision_farmer_profile");
+        let pName = "संकेत किर्दत";
+        let pDist = "सातारा (3.5 एकर)";
+        if (saved) {
+            try {
+                const p = JSON.parse(saved);
+                pName = p.name;
+                pDist = `${p.district} (${p.area})`;
+            } catch(e){}
+        }
+        if (rxFarmerName) rxFarmerName.textContent = pName;
+        if (rxDistrict) rxDistrict.textContent = pDist;
+
+        // Current Disease Diagnosis
+        if (currentDiseaseData) {
+            if (rxCropName) rxCropName.textContent = currentDiseaseData.crop_name;
+            if (rxDiseaseTitle) rxDiseaseTitle.textContent = currentDiseaseData.marathi_name;
+            if (rxAccuracyVal) rxAccuracyVal.textContent = `${currentDiseaseData.confidence}% AI Verified`;
+            if (rxSymptomsBody) rxSymptomsBody.textContent = currentDiseaseData.symptoms;
+
+            const oCost = currentDiseaseData.organic_cost || 650;
+            const cCost = currentDiseaseData.chemical_cost || 1250;
+            if (rxOrgCostTag) rxOrgCostTag.textContent = `एकरी खर्च: ₹ ${oCost}`;
+            if (rxChemCostTag) rxChemCostTag.textContent = `एकरी खर्च: ₹ ${cCost}`;
+            if (rxOrgContent) rxOrgContent.innerHTML = formatPrescriptionText(currentDiseaseData.organic_remedy);
+            if (rxChemContent) rxChemContent.innerHTML = formatPrescriptionText(currentDiseaseData.chemical_remedy);
+        } else {
+            // Default sample prescription
+            if (rxCropName) rxCropName.textContent = "टोमॅटो (Tomato)";
+            if (rxDiseaseTitle) rxDiseaseTitle.textContent = "टोमॅटो - लवकर येणारा करपा (Early Blight)";
+            if (rxAccuracyVal) rxAccuracyVal.textContent = "96.4% AI Verified";
+            if (rxSymptomsBody) rxSymptomsBody.textContent = "पानांवर गोलाकार गडद तपकिरी वलयाकार (केंद्रीत गोल) ठिपके पडतात. जुनी पाने पिवळी पडून गळतात.";
+            if (rxOrgCostTag) rxOrgCostTag.textContent = "एकरी खर्च: ₹ 650";
+            if (rxChemCostTag) rxChemCostTag.textContent = "एकरी खर्च: ₹ 1,250";
+        }
+
+        modalPrescription.classList.remove("hidden");
+    };
+
+    window.closePrescriptionModal = function() {
+        if (modalPrescription) modalPrescription.classList.add("hidden");
+    };
+
+    window.printPrescriptionSlip = function() {
+        window.print();
+    };
+
+
+    // ==========================================================
+    // 9. GOOGLE ASSISTANT-STYLE KRISHI AI VOICE ASSISTANT
+    // ==========================================================
+    const btnVoiceAssistant = document.getElementById("btnVoiceAssistant");
+    const modalVoiceAssistant = document.getElementById("modalVoiceAssistant");
+    const voiceWaves = document.getElementById("voiceWaves");
+    const voiceStatusText = document.getElementById("voiceStatusText");
+    const voiceUserQuery = document.getElementById("voiceUserQuery");
+    const voiceQueryText = document.getElementById("voiceQueryText");
+    const voiceAiReply = document.getElementById("voiceAiReply");
+    const voiceReplyText = document.getElementById("voiceReplyText");
+    const voiceTextInput = document.getElementById("voiceTextInput");
+
+    let isListening = false;
+    let recognition = null;
+
+    // Initialize Web Speech API SpeechRecognition
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = currentLang === "mr" ? "mr-IN" : "en-IN";
+
+        recognition.onstart = function() {
+            isListening = true;
+            if (voiceWaves) voiceWaves.style.opacity = "1";
+            if (voiceStatusText) voiceStatusText.textContent = currentLang === "mr" 
+                ? "🎙️ मी ऐकत आहे... (Listening in Marathi)..." 
+                : "🎙️ Listening to your query...";
+        };
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            if (transcript) {
+                processVoiceQuery(transcript);
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.warn("[Voice Assistant Error]", event.error);
+            isListening = false;
+            if (voiceWaves) voiceWaves.style.opacity = "0.3";
+            if (voiceStatusText) voiceStatusText.textContent = "मायक्रोफोन परवानगी तपासा किंवा खाली प्रश्न टाईप करा.";
+        };
+
+        recognition.onend = function() {
+            isListening = false;
+            if (voiceWaves) voiceWaves.style.opacity = "0.3";
+        };
+    }
+
+    window.openVoiceAssistant = function() {
+        if (modalVoiceAssistant) modalVoiceAssistant.classList.remove("hidden");
+        if (recognition) recognition.lang = currentLang === "mr" ? "mr-IN" : "en-IN";
+    };
+
+    window.closeVoiceAssistant = function() {
+        if (modalVoiceAssistant) modalVoiceAssistant.classList.add("hidden");
+        if (recognition && isListening) recognition.stop();
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+    };
+
+    if (btnVoiceAssistant) {
+        btnVoiceAssistant.addEventListener("click", openVoiceAssistant);
+    }
+
+    window.toggleSpeechRecognition = function() {
+        if (!recognition) {
+            alert("तुमच्या ब्राउझरमध्ये व्हॉइस रेकग्निशन उपलब्ध नाही. कृपया प्रश्न खाली टाईप करा.");
+            return;
+        }
+        if (isListening) {
+            recognition.stop();
+        } else {
+            recognition.lang = currentLang === "mr" ? "mr-IN" : "en-IN";
+            recognition.start();
+        }
+    };
+
+    // Predefined quick voice chips
+    window.askVoicePredefined = function(query) {
+        processVoiceQuery(query);
+    };
+
+    window.sendVoiceTextQuery = function() {
+        if (!voiceTextInput) return;
+        const query = voiceTextInput.value.trim();
+        if (query) {
+            processVoiceQuery(query);
+            voiceTextInput.value = "";
+        }
+    };
+
+    if (voiceTextInput) {
+        voiceTextInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendVoiceTextQuery();
+        });
+    }
+
+    // Process Query with Intelligent Krishi AI Logic & Text-to-Speech
+    function processVoiceQuery(query) {
+        if (voiceUserQuery) voiceUserQuery.classList.remove("hidden");
+        if (voiceQueryText) voiceQueryText.textContent = `"${query}"`;
+        if (voiceAiReply) voiceAiReply.classList.remove("hidden");
+
+        const qLower = query.toLowerCase();
+        let reply = "";
+        let action = null;
+
+        if (qLower.includes("टोमॅटो") || qLower.includes("tomato") || qLower.includes("करपा") || qLower.includes("blight")) {
+            reply = "टोमॅटोवरील करपा (Early Blight) रोखण्यासाठी सेंद्रिय उपाय म्हणून ट्रायकोडर्मा व्हिरिडी ५ ग्रॅम/लिटर किंवा ५% निंबोळी अर्क फवारा. रासायनिक उपायासाठी रिडोमिल गोल्ड २ ग्रॅम प्रति लिटर किंवा मॅन्कोझेब २.५ ग्रॅम फवारा. एकरी खर्च अंदाजे ₹ ६५० ते ₹ १२५० येईल.";
+        } else if (qLower.includes("कांदा") || qLower.includes("onion") || qLower.includes("जांभळा")) {
+            reply = "कांद्यावरील जांभळा करपा (Purple Blotch) नियंत्रणासाठी ५% निंबोळी अर्क आणि नॅटिव्हो ०.७ ग्रॅम प्रति लिटर पाण्यात स्टिकर मिसळून फवारा. एकरी खर्च अंदाजे ₹ १,५०० येईल.";
+        } else if (qLower.includes("बटाटा") || qLower.includes("potato")) {
+            reply = "बटाट्यावरील उशिरा येणाऱ्या करप्यावर (Late Blight) त्वरित मेटलॅक्सिल + मॅन्कोझेब (रिडोमिल गोल्ड) २.५ ग्रॅम प्रति लिटर पाण्यात फवारा. सेंद्रिय उपायासाठी बोर्डो मिश्रण १% वापरा.";
+        } else if (qLower.includes("हवामान") || qLower.includes("weather") || qLower.includes("सातारा")) {
+            reply = "सातारा जिल्ह्यात सध्या तापमान २६.८ अंश सेल्सिअस असून आर्द्रता ८२% इतकी जास्त आहे. पुढील ४८ तासांत बुरशीजन्य रोगाचा तीव्र धोका असल्याने प्रतिबंधात्मक बुरशीनाशक फवारणी करा.";
+        } else if (qLower.includes("खर्च") || qLower.includes("cost") || qLower.includes("सेंद्रिय")) {
+            reply = "FieldVision AI नुसार सेंद्रिय औषधांचा एकरी खर्च अंदाजे ₹ ५०० ते ₹ ७५० येतो, तर रासायनिक औषधांचा खर्च ₹ १,२०० ते ₹ २,००० पर्यंत येतो.";
+        } else if (qLower.includes("स्कॅन") || qLower.includes("कॅमेरा") || qLower.includes("camera") || qLower.includes("scan")) {
+            reply = "मी Live AR कॅमेरा स्कॅनर सुरू करत आहे. कृपया पिकाच्या पानावर कॅमेरा रोखा.";
+            action = () => switchTab("camera");
+        } else {
+            reply = "FieldVision AI प्रणालीमध्ये आपले स्वागत आहे! मी पिकांचे रोग, सेंद्रिय उपाय, रासायनिक फवारणी व हवामानाबद्दल मार्गदर्शन करू शकतो. आपण पानाचा फोटो काढून थेट स्कॅनिंग देखील करू शकता.";
+        }
+
+        if (voiceReplyText) voiceReplyText.textContent = reply;
+        if (voiceStatusText) voiceStatusText.textContent = "उत्तर तयार आहे.";
+
+        // Speak aloud via SpeechSynthesis
+        speakResponseAloud(reply);
+
+        if (action) {
+            setTimeout(action, 1500);
+        }
+    }
+
+    function speakResponseAloud(text) {
+        if (!("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel(); // Cancel any ongoing speech
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+
+        // Try to pick Marathi or Indian voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const mrVoice = voices.find(v => v.lang.includes("mr") || v.lang.includes("hi") || v.name.includes("India"));
+        if (mrVoice) {
+            utterance.voice = mrVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Load initial farmer profile
+    loadFarmerProfile();
 
     // Initial load: Set Satara weather
     updateWeatherMetrics("Satara");
 });
+
 

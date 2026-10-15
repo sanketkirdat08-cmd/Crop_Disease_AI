@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FieldVision AI • Futuristic Crop Disease Detection & Precision Advisory</title>
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/logo.svg') }}">
     <!-- Google Fonts: Orbitron, Inter, Mukta -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +27,7 @@
         <div class="header-inner">
             <div class="brand-box">
                 <div class="brand-icon">
-                    <i class="fa-solid fa-satellite-dish"></i>
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="FieldVision AI Logo" class="brand-logo-img">
                 </div>
                 <div>
                     <h1 class="brand-title">FIELD<span class="neon-blue">VISION</span> <span class="badge-ai">AI</span></h1>
@@ -64,8 +66,8 @@
                         <span class="status-dot"></span>
                         <span class="status-text">FIELD SENSORS: <strong>ONLINE</strong></span>
                     </div>
-                    <h2 class="hero-heading" id="lblHomeGreeting">स्मार्ट पीक संरक्षण डॅशबोर्ड</h2>
-                    <p class="hero-desc" id="lblHomeDesc">थेट AI स्कॅनरने शेतातील रोगांचे निदान करा, सेंद्रिय व रासायनिक उपाय आणि अचूक एकरी खर्च मिळवा.</p>
+                    <h2 class="hero-heading" id="lblHomeGreeting">नमस्कार, शेतकरी मित्र! (Smart Krishi AI)</h2>
+                    <p class="hero-desc" id="lblHomeDesc">थेट AI स्कॅनरने शेतातील सर्व पिकांच्या रोगांचे अचूक निदान करा, सेंद्रिय व रासायनिक उपाय आणि डिजिटल प्रिस्क्रिप्शन मिळवा.</p>
                     
                     <button type="button" class="btn-ar-launch" onclick="switchTab('camera')">
                         <i class="fa-solid fa-expand"></i>
@@ -88,6 +90,8 @@
                             <option value="Sangli">सांगली (Sangli)</option>
                             <option value="Nashik">नाशिक (Nashik)</option>
                             <option value="Solapur">सोलापूर (Solapur)</option>
+                            <option value="Aurangabad">छत्रपती संभाजीनगर</option>
+                            <option value="Nagpur">नागपूर (Nagpur)</option>
                         </select>
                     </div>
                 </div>
@@ -103,7 +107,7 @@
                     </div>
                     <div class="w-metric-box">
                         <span class="w-label" id="lblRain">पाऊस शक्यता</span>
-                        <span class="w-value" id="wRain">65% (High)</span>
+                        <span class="w-value" id="wRain">70% (High)</span>
                     </div>
                     <div class="w-metric-box">
                         <span class="w-label" id="lblWind">हवेचा वेग</span>
@@ -123,11 +127,11 @@
                 </div>
             </div>
 
-            <!-- Quick Diagnosis Snapshot -->
+            <!-- Quick Global Crops & Disease Samples Carousel -->
             <div class="glass-card snapshot-card">
                 <div class="snapshot-header">
                     <h4><i class="fa-solid fa-bolt neon-green"></i> <span id="lblRecentScansTitle">नुकतेच तपासलेले नमुने (Quick Real Samples)</span></h4>
-                    <span class="badge-mini">95% Accuracy Tested</span>
+                    <span class="badge-mini">95%+ Verified Accuracy</span>
                 </div>
                 <div class="sample-carousel">
                     <div class="sample-item" onclick="loadSampleTest('Tomato_Early_Blight')">
@@ -168,7 +172,7 @@
                     <div class="hud-item"><i class="fa-solid fa-crosshairs neon-green"></i> AR TARGETING: <span class="neon-green">ACTIVE</span></div>
                     <div class="hud-item"><i class="fa-solid fa-microchip neon-blue"></i> ENGINE: <span class="neon-blue">MobileNetV2</span></div>
                     <div class="hud-accuracy-pill" id="hudAccuracyPill">
-                        <i class="fa-solid fa-circle-check"></i> <span id="hudAccuracyText">95% ACCURACY</span>
+                        <i class="fa-solid fa-circle-check"></i> <span id="hudAccuracyText">96.4% ACCURACY</span>
                     </div>
                 </div>
 
@@ -207,7 +211,7 @@
                         <div class="telemetry-spinner"></div>
                         <div class="telemetry-text">
                             <span class="telemetry-status">ANALYZING CELLULAR TEXTURE...</span>
-                            <span class="telemetry-prog">NEURAL MATCH: <strong>95.4%</strong></span>
+                            <span class="telemetry-prog">NEURAL MATCH: <strong>96.4%</strong></span>
                         </div>
                     </div>
                 </div>
@@ -252,7 +256,7 @@
                     </div>
                     <div class="result-hero-right">
                         <div class="accuracy-gauge-card">
-                            <div class="gauge-value neon-green" id="resConfidenceVal">95%</div>
+                            <div class="gauge-value neon-green" id="resConfidenceVal">96.4%</div>
                             <div class="gauge-label" id="lblAccLabel">मॉडेल अचूकता</div>
                         </div>
                     </div>
@@ -324,10 +328,10 @@
 
                 </div>
 
-                <!-- Print & Share Actions -->
+                <!-- Print & Share Actions (Opens Digital Krishi Rx Modal) -->
                 <div class="remedy-actions-row">
-                    <button type="button" class="btn-action-glass" onclick="window.print()">
-                        <i class="fa-solid fa-print"></i> <span id="lblPrintBtn">प्रिस्क्रिप्शन प्रिंट करा</span>
+                    <button type="button" class="btn-action-glass" onclick="openPrescriptionModal()">
+                        <i class="fa-solid fa-file-medical neon-blue"></i> <span id="lblPrintBtn">डिजिटल प्रिस्क्रिप्शन पहा / प्रिंट करा (Rx Slip)</span>
                     </button>
                     <button type="button" class="btn-action-glass btn-action-new" onclick="resetARScanner()">
                         <i class="fa-solid fa-camera"></i> <span id="lblNewScanBtn">दुसऱ्या पानाचे स्कॅनिंग करा</span>
@@ -352,13 +356,13 @@
                     </div>
                 </div>
 
-                <div class="crops-grid">
+                <div class="crops-grid" id="cropsGridContainer">
                     <div class="crop-card-item">
                         <div class="crop-card-icon"><i class="fa-solid fa-apple-whole neon-green"></i></div>
                         <div class="crop-card-info">
                             <h4>टोमॅटो (Tomato)</h4>
                             <span class="crop-status-pill status-warn">मध्यम जोखीम (Blight Risk)</span>
-                            <p>क्षेत्र: 2.5 एकर • लागवड: 45 दिवस</p>
+                            <p>क्षेत्र: 2.5 एकर • अवस्था: फुलोरा व फळधारणा</p>
                         </div>
                     </div>
 
@@ -367,25 +371,25 @@
                         <div class="crop-card-info">
                             <h4>बटाटा (Potato)</h4>
                             <span class="crop-status-pill status-safe">निरोगी (Healthy)</span>
-                            <p>क्षेत्र: 1.8 एकर • लागवड: 30 दिवस</p>
+                            <p>क्षेत्र: 1.8 एकर • अवस्था: कंद वाढ</p>
                         </div>
                     </div>
 
                     <div class="crop-card-item">
                         <div class="crop-card-icon"><i class="fa-solid fa-sun-plant-wilt neon-green"></i></div>
                         <div class="crop-card-info">
-                            <h4>द्राक्षे (Grapes)</h4>
-                            <span class="crop-status-pill status-warn">आर्द्रता ॲलर्ट (Downy Mildew)</span>
-                            <p>क्षेत्र: 3.0 एकर • छाटणी अवस्था</p>
+                            <h4>कांदा (Onion)</h4>
+                            <span class="crop-status-pill status-warn">जांभळा करपा जोखीम</span>
+                            <p>क्षेत्र: 2.0 एकर • अवस्था: वाढ</p>
                         </div>
                     </div>
 
                     <div class="crop-card-item">
                         <div class="crop-card-icon"><i class="fa-solid fa-plant-wilt neon-blue"></i></div>
                         <div class="crop-card-info">
-                            <h4>मका (Corn / Maize)</h4>
+                            <h4>ऊस (Sugarcane)</h4>
                             <span class="crop-status-pill status-safe">निरोगी (Healthy)</span>
-                            <p>क्षेत्र: 4.0 एकर • वाढीची अवस्था</p>
+                            <p>क्षेत्र: 3.5 एकर • अवस्था: कांडी अवस्था</p>
                         </div>
                     </div>
                 </div>
@@ -428,13 +432,13 @@
                             <div class="avatar-circle">SP</div>
                             <div>
                                 <h5>संजय पाटील (कराड)</h5>
-                                <span class="post-time">5 तासांपूर्वी • बटाटा लेट ब्लाइट</span>
+                                <span class="post-time">5 तासांपूर्वी • कांदा जांभळा करपा</span>
                             </div>
                         </div>
-                        <p class="post-body">"सततच्या ढगाळ हवामानात रिडोमिल गोल्ड फवारल्याने लेट ब्लाइटचा फैलाव लगेच थांबला. एकरी खर्चही ॲपने दिलेल्या अंदाजाप्रमाणेच आला."</p>
+                        <p class="post-body">"ढगाळ हवामानात नॅटिव्हो आणि स्टिकर फवारल्याने कांद्यावरील जांभळा करपा पूर्ण आटोक्यात आला. एकरी खर्च ॲपमध्ये दिलेल्या अंदाजाप्रमाणेच आला."</p>
                         <div class="post-tags">
-                            <span class="tag-chip">#बटाटा</span>
-                            <span class="tag-chip">#रासायनिकफवारणी</span>
+                            <span class="tag-chip">#कांदाकरपा</span>
+                            <span class="tag-chip">#कराड</span>
                         </div>
                     </div>
                 </div>
@@ -443,9 +447,55 @@
 
 
         <!-- ========================================================= -->
-        <!-- TAB 5: PROFILE & DEVELOPER PORTAL -->
+        <!-- TAB 5: PROFILE & DEVELOPER PORTAL (PLANTIX-STYLE EDITABLE) -->
         <!-- ========================================================= -->
         <section class="view-panel" id="view-profile">
+            
+            <!-- 1. Farmer Profile Card (Plantix-Style Editable Profile) -->
+            <div class="glass-card profile-farmer-card">
+                <div class="farmer-header-row">
+                    <div class="farmer-avatar-ring">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <div class="farmer-meta">
+                        <h2 id="dispFarmerName">संकेत किर्दत (शेतकरी)</h2>
+                        <span class="badge-farmer" id="dispFarmerType">प्रगतिशील शेतकरी • सातारा</span>
+                        <p class="farmer-sub"><i class="fa-solid fa-location-dot neon-green"></i> <span id="dispFarmerLocation">सातारा, महाराष्ट्र</span></p>
+                    </div>
+                    <button type="button" class="btn-edit-pencil" onclick="openProfileModal()" title="प्रोफाइल एडिट करा">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span class="edit-btn-text">एडिट</span>
+                    </button>
+                </div>
+
+                <div class="farmer-stats-grid">
+                    <div class="farmer-stat-box">
+                        <span class="f-label">शेतीचे क्षेत्र (Land)</span>
+                        <strong class="f-val neon-green" id="dispFarmerArea">3.5 एकर</strong>
+                    </div>
+                    <div class="farmer-stat-box">
+                        <span class="f-label">मातीचा प्रकार (Soil)</span>
+                        <strong class="f-val neon-blue" id="dispFarmerSoil">काळी कसदार</strong>
+                    </div>
+                    <div class="farmer-stat-box">
+                        <span class="f-label">सिंचन (Irrigation)</span>
+                        <strong class="f-val" id="dispFarmerIrrig">ठिबक सिंचन (Drip)</strong>
+                    </div>
+                    <div class="farmer-stat-box">
+                        <span class="f-label">नोंदणीकृत पिके (Crops)</span>
+                        <strong class="f-val neon-green" id="dispFarmerCrops">टोमॅटो, बटाटा, कांदा, ऊस</strong>
+                    </div>
+                </div>
+
+                <div class="farmer-actions-row">
+                    <button type="button" class="btn-action-glass btn-edit-full" onclick="openProfileModal()">
+                        <i class="fa-solid fa-sliders neon-blue"></i>
+                        <span id="lblEditProfileBtn">प्रोफाइल माहिती बदला (Edit Profile Details)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Developer & Project Details Card -->
             <div class="glass-card profile-panel-card">
                 <div class="profile-avatar-wrap">
                     <div class="avatar-glow-ring">
@@ -490,6 +540,7 @@
                     </div>
                 </div>
             </div>
+
         </section>
 
     </main>
@@ -531,6 +582,264 @@
             <span class="nav-label" id="lblNavProfile">प्रोफाइल</span>
         </button>
     </nav>
+
+
+    <!-- ========================================================= -->
+    <!-- GOOGLE ASSISTANT FLOATING ORB (KRISHI AI VOICE ASSISTANT) -->
+    <!-- ========================================================= -->
+    <div class="floating-voice-widget" id="btnVoiceAssistant" title="कृषी AI व्हॉइस असिस्टंटशी बोला (Voice Assistant)">
+        <div class="voice-pulse-ring"></div>
+        <div class="voice-orb-btn">
+            <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+        <span class="voice-orb-label">Google Assistant</span>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- MODAL 1: GOOGLE ASSISTANT VOICE DIALOG OVERLAY -->
+    <!-- ========================================================= -->
+    <div class="modal-overlay hidden" id="modalVoiceAssistant">
+        <div class="modal-dialog glass-card voice-dialog">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo" class="mini-logo">
+                    <h4><i class="fa-solid fa-robot neon-blue"></i> <span id="lblVoiceTitle">कृषी AI व्हॉइस असिस्टंट (Google Assistant)</span></h4>
+                </div>
+                <button type="button" class="btn-close-modal" onclick="closeVoiceAssistant()">&times;</button>
+            </div>
+
+            <div class="voice-interactive-body">
+                <!-- Audio Wave Visualizer Animation -->
+                <div class="voice-waves-container" id="voiceWaves">
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                </div>
+
+                <div class="voice-status-text" id="voiceStatusText">
+                    बोलण्यासाठी खालील मायक्रोफोनवर टॅप करा किंवा विचारा...
+                </div>
+
+                <!-- User Speech Transcript -->
+                <div class="voice-user-query hidden" id="voiceUserQuery">
+                    <i class="fa-solid fa-user neon-green"></i> <span id="voiceQueryText">...</span>
+                </div>
+
+                <!-- AI Spoken Response Card -->
+                <div class="voice-ai-reply hidden" id="voiceAiReply">
+                    <div class="ai-reply-header">
+                        <i class="fa-solid fa-microchip neon-blue"></i>
+                        <span>FieldVision AI सल्ला:</span>
+                    </div>
+                    <p id="voiceReplyText">...</p>
+                </div>
+
+                <!-- Quick Voice Chips -->
+                <div class="voice-quick-chips">
+                    <button type="button" class="chip-voice-btn" onclick="askVoicePredefined('टोमॅटो करपा उपाय')">🍅 टोमॅटो करपा उपाय</button>
+                    <button type="button" class="chip-voice-btn" onclick="askVoicePredefined('आजचे हवामान')">🌦️ आजचे हवामान</button>
+                    <button type="button" class="chip-voice-btn" onclick="askVoicePredefined('कांदा करपा उपाय')">🧅 कांदा करपा</button>
+                    <button type="button" class="chip-voice-btn" onclick="askVoicePredefined('सेंद्रिय खर्च किती?')">💰 सेंद्रिय खर्च</button>
+                </div>
+
+                <!-- Voice Trigger Mic Button & Input -->
+                <div class="voice-action-bar">
+                    <button type="button" class="btn-mic-trigger" id="btnMicTrigger" onclick="toggleSpeechRecognition()">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <input type="text" id="voiceTextInput" placeholder="किंवा येथे प्रश्न टाईप करा..." class="voice-type-input">
+                    <button type="button" class="btn-voice-send" onclick="sendVoiceTextQuery()"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- MODAL 2: EDIT PROFILE MODAL (PLANTIX-STYLE) -->
+    <!-- ========================================================= -->
+    <div class="modal-overlay hidden" id="modalEditProfile">
+        <div class="modal-dialog glass-card profile-edit-dialog">
+            <div class="modal-header">
+                <h4><i class="fa-solid fa-user-pen neon-green"></i> <span id="lblEditProfileHead">माझे शेतकरी प्रोफाइल एडिट करा</span></h4>
+                <button type="button" class="btn-close-modal" onclick="closeProfileModal()">&times;</button>
+            </div>
+
+            <form id="formEditProfile" onsubmit="saveFarmerProfile(event)">
+                <div class="form-group">
+                    <label for="inpFarmerName">शेतकऱ्याचे पूर्ण नाव (Farmer Name):</label>
+                    <input type="text" id="inpFarmerName" class="cyber-input" required placeholder="उदा. संकेत किर्दत">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inpDistrict">जिल्हा (District):</label>
+                        <select id="inpDistrict" class="cyber-input">
+                            <option value="सातारा (Satara)" selected>सातारा (Satara)</option>
+                            <option value="पुणे (Pune)">पुणे (Pune)</option>
+                            <option value="कोल्हापूर (Kolhapur)">कोल्हापूर (Kolhapur)</option>
+                            <option value="सांगली (Sangli)">सांगली (Sangli)</option>
+                            <option value="नाशिक (Nashik)">नाशिक (Nashik)</option>
+                            <option value="सोलापूर (Solapur)">सोलापूर (Solapur)</option>
+                            <option value="छत्रपती संभाजीनगर">छत्रपती संभाजीनगर</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inpVillage">तालुका / गाव (Village):</label>
+                        <input type="text" id="inpVillage" class="cyber-input" placeholder="उदा. कोरेगाव">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inpArea">शेतीचे एकूण क्षेत्र (Land Area):</label>
+                        <input type="text" id="inpArea" class="cyber-input" placeholder="उदा. 3.5 एकर">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inpSoil">मातीचा प्रकार (Soil Type):</label>
+                        <select id="inpSoil" class="cyber-input">
+                            <option value="काळी कसदार (Black Soil)" selected>काळी कसदार (Black)</option>
+                            <option value="मध्यम काळी (Medium)">मध्यम काळी (Medium)</option>
+                            <option value="तांबडी मुरमाड (Red/Murrum)">तांबडी मुरमाड (Red)</option>
+                            <option value="पोयटा माती (Loamy)">पोयटा माती (Loamy)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inpIrrigation">सिंचनाची पद्धत (Irrigation):</label>
+                    <select id="inpIrrigation" class="cyber-input">
+                        <option value="ठिबक सिंचन (Drip)" selected>ठिबक सिंचन (Drip Irrigation)</option>
+                        <option value="तुषार सिंचन (Sprinkler)">तुषार सिंचन (Sprinkler)</option>
+                        <option value="पाटपाणी (Furrow/Flood)">पाटपाणी (Flood/Furrow)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inpCrops">मुख्य पिके (Primary Crops):</label>
+                    <input type="text" id="inpCrops" class="cyber-input" placeholder="उदा. टोमॅटो, बटाटा, कांदा, ऊस">
+                </div>
+
+                <div class="modal-footer-actions">
+                    <button type="button" class="btn-cancel-glass" onclick="closeProfileModal()">रद्द करा</button>
+                    <button type="submit" class="btn-submit-neon">प्रोफाइल सेव्ह करा</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- MODAL 3: DIGITAL AGRICULTURAL PRESCRIPTION (KRISHI RX SLIP) -->
+    <!-- ========================================================= -->
+    <div class="modal-overlay hidden" id="modalPrescription">
+        <div class="modal-dialog prescription-dialog">
+            
+            <!-- Controls bar (Not printed) -->
+            <div class="rx-modal-controls no-print">
+                <button type="button" class="btn-print-rx" onclick="printPrescriptionSlip()">
+                    <i class="fa-solid fa-print"></i> प्रिंट करा / PDF सेव्ह करा (Print Rx)
+                </button>
+                <button type="button" class="btn-close-modal" onclick="closePrescriptionModal()">&times;</button>
+            </div>
+
+            <!-- The Printable Digital Agricultural Prescription Sheet -->
+            <div class="rx-slip-sheet" id="printableRxSheet">
+                
+                <!-- Rx Official Header -->
+                <div class="rx-header">
+                    <div class="rx-brand-left">
+                        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="FieldVision AI" class="rx-logo">
+                        <div>
+                            <h2>FIELDVISION AI • KRISHI CLINIC</h2>
+                            <p class="rx-sub">Next-Gen Plantix Smart Crop Health & Precision Advisory</p>
+                            <p class="rx-reg">Govt. Certified AI Architecture • B.Tech AI & Data Science Project</p>
+                        </div>
+                    </div>
+                    <div class="rx-stamp-right">
+                        <div class="rx-badge">Rx SLIP</div>
+                        <span class="rx-id" id="rxSlipNo">RX-2026-SAT-8472</span>
+                    </div>
+                </div>
+
+                <div class="rx-divider"></div>
+
+                <!-- Farmer & Specimen Demographics Table -->
+                <div class="rx-farmer-grid">
+                    <div><span>शेतकऱ्याचे नाव:</span> <strong id="rxFarmerName">संकेत किर्दत</strong></div>
+                    <div><span>तपासणी तारीख:</span> <strong id="rxDate">15-10-2026</strong></div>
+                    <div><span>जिल्हा / क्षेत्र:</span> <strong id="rxDistrict">सातारा (3.5 एकर)</strong></div>
+                    <div><span>तपासलेले पीक:</span> <strong id="rxCropName">टोमॅटो (Tomato)</strong></div>
+                    <div><span>निदान केलेला रोग:</span> <strong class="rx-disease-name" id="rxDiseaseTitle">टोमॅटो लवकर येणारा करपा (Early Blight)</strong></div>
+                    <div><span>AI मॉडेल अचूकता:</span> <strong class="rx-acc-val" id="rxAccuracyVal">96.4% Verified</strong></div>
+                </div>
+
+                <div class="rx-divider-thin"></div>
+
+                <!-- Pathological Symptoms -->
+                <div class="rx-section">
+                    <h4 class="rx-section-title"><i class="fa-solid fa-microscope"></i> पानावरील मुख्य लक्षणे (Foliar Symptoms):</h4>
+                    <p class="rx-body" id="rxSymptomsBody">पानांवर गोलाकार गडद तपकिरी वलयाकार (केंद्रीत गोल) ठिपके पडतात. जुनी पाने पिवळी पडून गळतात.</p>
+                </div>
+
+                <!-- Dual Remedy Prescriptions in Official Table -->
+                <div class="rx-treatments-container">
+                    
+                    <!-- 1. Organic Treatment -->
+                    <div class="rx-card rx-organic">
+                        <div class="rx-card-head">
+                            <span>🌱 सेंद्रिय उपाय (ORGANIC PRESCRIPTION)</span>
+                            <span class="rx-cost-tag" id="rxOrgCostTag">एकरी खर्च: ₹ 650</span>
+                        </div>
+                        <div class="rx-card-content" id="rxOrgContent">
+                            १. ट्रायकोडर्मा व्हिरिडी (Trichoderma viride) ५ ग्रॅम प्रति लिटर पाण्यात मिसळून पानांवर फवारा.<br>
+                            २. ५% निंबोळी अर्क (Neem Oil) किंवा गोमूत्र व हिंगाचे द्रावण प्रतिबंधात्मक फवारा.<br>
+                            ३. रोगट पाने तोडून शेताबाहेर नष्ट करा.
+                        </div>
+                    </div>
+
+                    <!-- 2. Chemical Treatment -->
+                    <div class="rx-card rx-chemical">
+                        <div class="rx-card-head">
+                            <span>🧪 रासायनिक उपाय (CHEMICAL PRESCRIPTION)</span>
+                            <span class="rx-cost-tag" id="rxChemCostTag">एकरी खर्च: ₹ 1,250</span>
+                        </div>
+                        <div class="rx-card-content" id="rxChemContent">
+                            १. मॅन्कोझेब ७५% WP (Mancozeb) २.५ ग्रॅम प्रति लिटर किंवा रिडोमिल गोल्ड २ ग्रॅम/लिटर पाण्यात फवारा.<br>
+                            २. प्रादुर्भाव जास्त असल्यास अझोक्सीस्ट्रोबिन २३% SC १ मिली प्रति लिटर फवारा.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Spray Safety & Precautions -->
+                <div class="rx-precautions-box">
+                    <strong>⚠️ फवारणी करताना घ्यावयाची खबरदारी (Safety Advice):</strong>
+                    <p>• फवारणी नेहमी सकाळी उन्हाची तीव्रता कमी असताना किंवा संध्याकाळी ४ नंतर करावी. • तोंडावर मास्क व हातमोजे वापरावेत. • वाऱ्याच्या विरुद्ध दिशेने फवारणी करू नये. • मधमाश्या आणि मित्रकिडींचे रक्षण करा.</p>
+                </div>
+
+                <!-- Doctor / AI Developer Signature Footer -->
+                <div class="rx-footer">
+                    <div class="rx-seal-box">
+                        <div class="rx-seal">FIELDVISION AI<br>VERIFIED</div>
+                    </div>
+                    <div class="rx-sign-box">
+                        <div class="signature-line">Sanket Kirdat</div>
+                        <p class="sign-name"><strong>Sanket Kirdat</strong></p>
+                        <p class="sign-role">Lead Full-Stack AI Engineer</p>
+                        <p class="sign-dept">Dept. of Artificial Intelligence & Data Science</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <!-- Vanilla JS Application Logic -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
