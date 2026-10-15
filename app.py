@@ -116,44 +116,55 @@ def get_live_weather(city="Pune"):
         except Exception as e:
             print(f"[Weather API Warning] Failed to fetch live weather: {e}")
 
-    # Fallback Realistic Weather (Maharashtra Climatic Averages)
-    base_temps = {"Pune": 29.5, "Nashik": 28.0, "Kolhapur": 29.0, "Nagpur": 33.0, "Aurangabad": 31.0}
-    temp = base_temps.get(city, 29.0) + round(random.uniform(-1.5, 1.5), 1)
-    humidity = random.randint(68, 86)
-    conditions = ["Partly Cloudy", "Sunny Intervals", "Humid Breezes", "Overcast"]
+    # Realistic Weather Profiles for Maharashtra Districts (with Satara Priority)
+    district_profiles = {
+        "Satara": {"temp": 26.8, "humidity": 82, "cond_mr": "दमट व थंड वारे", "cond_en": "Humid & Breezy"},
+        "Pune": {"temp": 28.5, "humidity": 76, "cond_mr": "अंशतः ढगाळ", "cond_en": "Partly Cloudy"},
+        "Kolhapur": {"temp": 27.5, "humidity": 84, "cond_mr": "दमट व ढगाळ", "cond_en": "Humid & Overcast"},
+        "Sangli": {"temp": 29.0, "humidity": 74, "cond_mr": "उबदार व कोरडे", "cond_en": "Warm & Clear"},
+        "Nashik": {"temp": 27.0, "humidity": 78, "cond_mr": "थंड वारे व आर्द्रता", "cond_en": "Breezy & Humid"},
+        "Solapur": {"temp": 32.0, "humidity": 65, "cond_mr": "उष्ण व कोरडे", "cond_en": "Dry & Sunny"},
+        "Aurangabad": {"temp": 30.5, "humidity": 71, "cond_mr": "कोरडे व स्वच्छ", "cond_en": "Clear & Warm"},
+        "Nagpur": {"temp": 33.0, "humidity": 68, "cond_mr": "उष्ण व निरभ्र", "cond_en": "Sunny & Warm"}
+    }
+    prof = district_profiles.get(city, district_profiles["Satara"])
+    temp = round(prof["temp"] + random.uniform(-0.8, 0.8), 1)
+    humidity = prof["humidity"]
     return {
         "city": city,
         "temp": temp,
         "humidity": humidity,
-        "condition": random.choice(conditions),
+        "condition": prof["cond_mr"],
+        "condition_en": prof["cond_en"],
         "is_live": False
     }
 
 
-def generate_weather_alert(humidity, risk_humidity=75):
+def generate_weather_alert(humidity, risk_humidity=75, lang="mr"):
     """
-    हवेतील आर्द्रता आणि रोगाचा धोका याबाबत मराठी ॲलर्ट तयार करणे
+    हवेतील आर्द्रता आणि रोगाचा धोका याबाबत मराठी/English ॲलर्ट तयार करणे
     """
+    is_mr = (lang == "mr")
     if humidity >= risk_humidity:
         return {
             "level": "HIGH",
             "badge_class": "badge-danger",
-            "title": "⚠️ उच्च आर्द्रता ॲलर्ट (High Fungal Infection Risk)",
-            "message": f"सध्या हवेतील आर्द्रता {humidity}% आहे (धोक्याची पातळी {risk_humidity}% पेक्षा जास्त). दमट वातावरणामुळे बुरशीजन्य रोगांचा संसर्ग वेगाने पसरू शकतो. पानांवर पाणी साचू देऊ नका आणि त्वरित प्रतिबंधात्मक बुरशीनाशक फवारा."
+            "title": "⚠️ उच्च आर्द्रता ॲलर्ट (High Fungal Infection Risk)" if is_mr else "⚠️ High Humidity Fungal Infection Risk Alert",
+            "message": f"सध्या हवेतील आर्द्रता {humidity}% आहे. दमट वातावरणामुळे बुरशीजन्य रोगांचा संसर्ग वेगाने पसरू शकतो. त्वरित प्रतिबंधात्मक बुरशीनाशक फवारा." if is_mr else f"Atmospheric humidity is high at {humidity}%. Damp environmental conditions drastically favor fungal sporulation. Apply preventative fungicides."
         }
     elif humidity >= 60:
         return {
             "level": "MODERATE",
             "badge_class": "badge-warning",
-            "title": "⚡ मध्यम हवामान जोखीम (Moderate Risk)",
-            "message": f"सध्या हवेतील आर्द्रता {humidity}% आहे. पिकाची वेळोवेळी पाहणी करा आणि सेंद्रिय निंबोळी अर्काची हलकी फवारणी करा."
+            "title": "⚡ मध्यम हवामान जोखीम (Moderate Risk)" if is_mr else "⚡ Moderate Climatic Risk",
+            "message": f"सध्या हवेतील आर्द्रता {humidity}% आहे. पिकाची नियमित पाहणी करा." if is_mr else f"Current humidity is {humidity}%. Inspect crops regularly for early symptoms."
         }
     else:
         return {
             "level": "LOW",
             "badge_class": "badge-success",
-            "title": "✅ अनुकूल हवामान (Safe Weather Condition)",
-            "message": f"सध्या हवेतील आर्द्रता {humidity}% असून हवामान कोरडे व नियंत्रणात आहे. रोगाचा धोका कमी आहे."
+            "title": "✅ अनुकूल हवामान (Safe Weather Condition)" if is_mr else "✅ Safe Weather Condition",
+            "message": f"सध्या हवेतील आर्द्रता {humidity}% असून हवामान कोरडे व नियंत्रणात आहे." if is_mr else f"Humidity is {humidity}%. Low fungal threat level."
         }
 
 
@@ -171,13 +182,13 @@ def preprocess_image(image_path):
 
 @app.route("/")
 def index():
-    weather = get_live_weather("Pune")
+    weather = get_live_weather("Satara")
     return render_template("index.html", weather=weather, db_mode=db.mode)
 
 
 @app.route("/api/weather", methods=["GET"])
 def weather_api():
-    city = request.args.get("city", "Pune")
+    city = request.args.get("city", "Satara")
     weather = get_live_weather(city)
     return jsonify(weather)
 
@@ -185,7 +196,7 @@ def weather_api():
 @app.route("/predict", methods=["POST"])
 def predict():
     """
-    प्रतिमा स्वीकारणे -> AI प्रेडिक्शन -> मराठी उपाय -> हवामान ॲलर्ट JSON पाठवणे
+    प्रतिमा स्वीकारणे -> AI प्रेडिक्शन -> मराठी/English उपाय -> हवामान ॲलर्ट JSON पाठवणे
     """
     if "file" not in request.files:
         return jsonify({"success": False, "error": "कृपया पिकाच्या पानाचा फोटो अपलोड करा."}), 400
@@ -204,16 +215,19 @@ def predict():
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], save_name)
         file.save(file_path)
 
-        # 2. Run High-Accuracy AI Inference Engine (Sanket Kirdat)
+        # 2. Get Selected Language and City
+        lang = request.form.get("lang", "mr")
+        city = request.form.get("city", "Satara")
+
+        # 3. Run High-Accuracy AI Inference Engine (Sanket Kirdat)
         from inference_engine import predict_leaf_disease
-        diag = predict_leaf_disease(file_path, filename=filename)
+        diag = predict_leaf_disease(file_path, filename=filename, lang=lang)
 
-        # 3. Weather and Humidity Risk Analysis
-        city = request.form.get("city", "Pune")
+        # 4. Weather and Humidity Risk Analysis
         weather = get_live_weather(city)
-        weather_alert = generate_weather_alert(weather["humidity"], diag.get("risk_humidity", 75))
+        weather_alert = generate_weather_alert(weather["humidity"], diag.get("risk_humidity", 75), lang=lang)
 
-        # 4. Return complete structured response for Glassmorphism UI
+        # 5. Return complete structured response for Glassmorphism UI
         return jsonify({
             "success": True,
             "image_url": url_for("static", filename=f"uploads/{save_name}"),
@@ -228,7 +242,7 @@ def predict():
             "weather": weather,
             "weather_alert": weather_alert,
             "db_mode": db.mode,
-            "developer": "Sanket Kirdat (संकेत किरदात)"
+            "developer": "Sanket Kirdat"
         })
 
     except Exception as e:

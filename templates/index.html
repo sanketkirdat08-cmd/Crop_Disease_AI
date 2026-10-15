@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="mr">
+<html lang="mr" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌾 Crop Disease AI | पिकांवरील रोग निदान आणि मराठी उपाय</title>
-    <!-- Google Fonts: Orbitron, Rajdhani, Hind (Marathi) -->
+    <title>🌾 Agri-AI Precision Doctor | Sanket Kirdat</title>
+    <!-- Google Fonts: Orbitron, Inter, Mukta -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Mukta:wght@400;500;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Cyberpunk Glassmorphism CSS -->
+    <!-- Cyberpunk Neon Glassmorphism CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="cyber-dark">
 
-    <!-- Background Ambient Glow Orbs -->
+    <!-- Ambient Glowing Orbs -->
     <div class="ambient-glow orb-cyan"></div>
     <div class="ambient-glow orb-magenta"></div>
     <div class="ambient-glow orb-green"></div>
@@ -23,37 +23,43 @@
     <!-- Navigation Header -->
     <header class="glass-header">
         <div class="header-container">
+            <!-- Brand Logo -->
             <div class="logo-group">
                 <div class="logo-icon">
                     <i class="fa-solid fa-seedling"></i>
                 </div>
                 <div>
                     <h1 class="logo-title">AGRI<span class="neon-cyan">SCAN</span> AI</h1>
-                    <p class="logo-subtitle">कृषी रोग निदान आणि मराठी उपाय • <strong>Developed by संकेत किरदात (Sanket Kirdat)</strong></p>
+                    <p class="logo-subtitle" id="hdrSub">पिकांवरील रोग निदान आणि अचूक कृषी सल्ला प्रणाली</p>
                 </div>
             </div>
 
-            <div class="header-status">
-                <div class="status-pill dev-name-pill">
-                    <i class="fa-solid fa-user-astronaut"></i>
-                    <span>डेव्हलपर: <strong>संकेत किरदात</strong></span>
+            <!-- Controls: Language Toggle & Developer Badge in Corner -->
+            <div class="header-controls">
+                <!-- Bilingual Toggle -->
+                <div class="lang-switch-box">
+                    <button type="button" class="lang-btn active" id="btnLangMr" data-lang="mr">मराठी</button>
+                    <button type="button" class="lang-btn" id="btnLangEn" data-lang="en">English</button>
                 </div>
-                <div class="status-pill">
-                    <span class="status-dot"></span>
-                    <span class="status-text">AI: <strong>MobileNetV2</strong></span>
+
+                <!-- Minimalist English-Only Developer Badge -->
+                <div class="dev-badge-corner" title="Lead AI Engineer">
+                    <i class="fa-solid fa-code"></i>
+                    <span>Dev: <strong>Sanket Kirdat</strong></span>
                 </div>
+
                 <div class="status-pill db-pill">
-                    <i class="fa-solid fa-database"></i>
-                    <span>DB: <strong id="dbStatus">{{ db_mode }}</strong></span>
+                    <span class="status-dot"></span>
+                    <span>AI: <strong>MobileNetV2</strong></span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
+    <!-- Main Workspace -->
     <main class="main-wrapper">
 
-        <!-- Top Weather & Advisory Ribbon -->
+        <!-- Top Weather Ribbon (Satara & Districts) -->
         <section class="glass-card weather-ribbon">
             <div class="weather-info-box">
                 <div class="weather-icon-pulse">
@@ -61,54 +67,57 @@
                 </div>
                 <div class="weather-text">
                     <div class="weather-top-row">
-                        <span class="badge-neon">सध्याचे हवामान अंदाज</span>
+                        <span class="badge-neon" id="lblLiveWeather">हवामान व रोग जोखीम</span>
                         <div class="city-selector-wrapper">
-                            <i class="fa-solid fa-location-dot"></i>
+                            <i class="fa-solid fa-location-dot neon-cyan"></i>
                             <select id="citySelect" class="cyber-select">
-                                <option value="Pune" selected>पुणे (Pune)</option>
-                                <option value="Nashik">नाशिक (Nashik)</option>
+                                <option value="Satara" selected>सातारा (Satara)</option>
+                                <option value="Pune">पुणे (Pune)</option>
                                 <option value="Kolhapur">कोल्हापूर (Kolhapur)</option>
+                                <option value="Sangli">सांगली (Sangli)</option>
+                                <option value="Nashik">नाशिक (Nashik)</option>
+                                <option value="Solapur">सोलापूर (Solapur)</option>
+                                <option value="Aurangabad">छ. संभाजीनगर (Chh. Sambhajinagar)</option>
                                 <option value="Nagpur">नागपूर (Nagpur)</option>
-                                <option value="Aurangabad">छ. संभाजीनगर (Aurangabad)</option>
                             </select>
                         </div>
                     </div>
                     <div class="weather-metrics">
                         <div class="metric-item">
-                            <span class="metric-label">तापमान</span>
+                            <span class="metric-label" id="lblTemp">तापमान</span>
                             <span class="metric-value neon-cyan" id="tempDisplay">{{ weather.temp }}°C</span>
                         </div>
                         <div class="metric-item">
-                            <span class="metric-label">हवेतील आर्द्रता</span>
+                            <span class="metric-label" id="lblHum">हवेतील आर्द्रता</span>
                             <span class="metric-value neon-magenta" id="humidityDisplay">{{ weather.humidity }}%</span>
                         </div>
                         <div class="metric-item">
-                            <span class="metric-label">हवामान स्थिती</span>
+                            <span class="metric-label" id="lblCond">हवामान स्थिती</span>
                             <span class="metric-value" id="condDisplay">{{ weather.condition }}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="weather-alert-box" id="quickWeatherAdvice">
-                <i class="fa-solid fa-triangle-exclamation neon-amber"></i>
+                <i class="fa-solid fa-shield-virus neon-amber"></i>
                 <span id="quickAdviceText">
                     {% if weather.humidity >= 75 %}
-                    दमट हवामानामुळे बुरशीजन्य रोगांचा प्रादुर्भाव वाढू शकतो. झाडांची वेळोवेळी पाहणी करा.
+                    सातारा / पश्चिम घाट परिसरातील अति-आर्द्रतेमुळे करपा व बुरशीचा प्रादुर्भाव वाढू शकतो.
                     {% else %}
-                    हवामान कोरडे असून रोगाचा धोका मर्यादित आहे.
+                    हवामान कोरडे असून रोग जोखीम नियंत्रणात आहे.
                     {% endif %}
                 </span>
             </div>
         </section>
 
-        <!-- Main Interactive Workspace Grid -->
+        <!-- Main Cyber Grid -->
         <div class="cyber-grid">
 
-            <!-- Left Column: Image Upload & Laser Scanner -->
+            <!-- Left Column: Sleek Upload & Camera Hub (No unnecessary clutter) -->
             <section class="glass-card upload-section">
                 <div class="card-header">
-                    <h2><i class="fa-solid fa-camera-retro neon-cyan"></i> पानाचा फोटो अपलोड करा</h2>
-                    <span class="card-step">पायरी १</span>
+                    <h2><i class="fa-solid fa-camera neon-cyan"></i> <span id="lblUploadHeading">पानाचा फोटो अपलोड / कॅमेरा</span></h2>
+                    <span class="card-step" id="lblStep1">पायरी १</span>
                 </div>
 
                 <div class="drop-zone" id="dropZone">
@@ -123,14 +132,15 @@
                         <div class="upload-icon-circle">
                             <i class="fa-solid fa-cloud-arrow-up"></i>
                         </div>
-                        <h3>येथे फोटो ड्रॅग करा किंवा कॅमेऱ्याने फोटो काढा</h3>
-                        <p class="file-tips">टोमॅटो, बटाटा, मका, द्राक्षे इत्यादी पिकांच्या पानाचा फोटो अपलोड करा किंवा थेट कॅमेऱ्याने काढा</p>
-                        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                        <h3 id="lblDropPrompt">येथे फोटो ड्रॅग करा किंवा कॅमेऱ्याने काढा</h3>
+                        <p class="file-tips" id="lblDropTip">टोमॅटो, बटाटा, मका, द्राक्षे पिकांच्या पानाचा फोटो निवडा</p>
+                        
+                        <div class="btn-group-upload">
                             <button type="button" class="btn-cyber-outline" id="browseBtn">
-                                <i class="fa-solid fa-folder-open"></i> गॅलरीमधून निवडा
+                                <i class="fa-solid fa-folder-open"></i> <span id="lblBrowse">गॅलरीमधून निवडा</span>
                             </button>
-                            <button type="button" class="btn-cyber-outline" id="cameraBtn" style="border-color:#00ff88; color:#00ff88;">
-                                <i class="fa-solid fa-camera"></i> 📸 थेट कॅमेरा सुरू करा
+                            <button type="button" class="btn-cyber-outline btn-cam-neon" id="cameraBtn">
+                                <i class="fa-solid fa-camera"></i> <span id="lblCam">📸 थेट कॅमेरा सुरू करा</span>
                             </button>
                         </div>
                     </div>
@@ -146,22 +156,33 @@
 
                 <!-- Action Button -->
                 <button type="button" class="btn-cyber-primary" id="analyzeBtn" disabled>
-                    <span class="btn-glitch-text"><i class="fa-solid fa-microchip"></i> AI रोग स्कॅनिंग सुरू करा</span>
+                    <span class="btn-glitch-text"><i class="fa-solid fa-microchip"></i> <span id="lblScanBtn">AI रोग स्कॅनिंग सुरू करा</span></span>
                     <span class="btn-glow-bar"></span>
                 </button>
 
                 <!-- Processing Spinner -->
                 <div class="scanning-status hidden" id="scanningStatus">
                     <div class="cyber-spinner"></div>
-                    <p class="scanning-msg">MobileNetV2 द्वारे पानाचे विश्लेषण चालू आहे... <span class="neon-cyan">९८% प्रगती</span></p>
+                    <p class="scanning-msg" id="lblScanningMsg">MobileNetV2 द्वारे पानाचे सखोल विश्लेषण चालू आहे...</p>
+                </div>
+
+                <!-- Quick Samples Bar -->
+                <div class="quick-samples-bar">
+                    <span class="quick-samples-title" id="lblQuickTest">अस्सल चाचणी नमुने (Quick Test):</span>
+                    <div class="sample-chips">
+                        <button type="button" class="chip-btn" data-img="/static/sample_test_images/Tomato_Early_Blight_करपा_Original.jpg" data-name="Tomato_Early_Blight">टोमॅटो करपा</button>
+                        <button type="button" class="chip-btn" data-img="/static/sample_test_images/Tomato_Late_Blight_तांबोरा_Original.jpg" data-name="Tomato_Late_Blight">टोमॅटो तांबोरा</button>
+                        <button type="button" class="chip-btn" data-img="/static/sample_test_images/Tomato_Healthy_निरोगी_Original.jpg" data-name="Tomato_Healthy">निरोगी पान</button>
+                        <button type="button" class="chip-btn" data-img="/static/sample_test_images/Corn_Common_Rust_तांबेरा_Original.jpg" data-name="Corn_Rust">मका तांबेरा</button>
+                    </div>
                 </div>
             </section>
 
-            <!-- Right Column: AI Disease Diagnosis & Marathi Remedies -->
+            <!-- Right Column: AI Disease Diagnosis & Bilingual Remedies -->
             <section class="glass-card result-section" id="resultSection">
                 <div class="card-header">
-                    <h2><i class="fa-solid fa-chart-pie neon-magenta"></i> AI रोग निदान व उपाय</h2>
-                    <span class="card-step">पायरी २</span>
+                    <h2><i class="fa-solid fa-chart-pie neon-magenta"></i> <span id="lblResultHeading">रोग निदान व कृषी सल्ला</span></h2>
+                    <span class="card-step" id="lblStep2">पायरी २</span>
                 </div>
 
                 <!-- Initial Idle State -->
@@ -169,8 +190,8 @@
                     <div class="idle-graphic">
                         <i class="fa-solid fa-microchip-viewfinder"></i>
                     </div>
-                    <h3>कोणताही निकाल उपलब्ध नाही</h3>
-                    <p>कृपया डाव्या बाजूला पिकाच्या पानाचा फोटो अपलोड करून <strong>"AI रोग स्कॅनिंग सुरू करा"</strong> वर क्लिक करा.</p>
+                    <h3 id="lblIdleHeading">कोणताही निकाल उपलब्ध नाही</h3>
+                    <p id="lblIdleText">कृपया डाव्या बाजूला पिकाच्या पानाचा फोटो अपलोड करा किंवा थेट कॅमेऱ्याने फोटो काढा.</p>
                 </div>
 
                 <!-- Live Results Container -->
@@ -185,7 +206,7 @@
                         </div>
                         <div class="confidence-circle">
                             <div class="conf-value neon-cyan" id="resConfidence">96.8%</div>
-                            <div class="conf-label">अचूकता (Confidence)</div>
+                            <div class="conf-label" id="lblConf">अचूकता (Confidence)</div>
                         </div>
                     </div>
 
@@ -205,71 +226,62 @@
                         <div class="cost-info">
                             <i class="fa-solid fa-indian-rupee-sign neon-green"></i>
                             <div>
-                                <span class="cost-title">उपचाराचा एकरी अंदाजे खर्च</span>
-                                <p class="cost-sub">सेंद्रिय व रासायनिक औषधांचा सरासरी खर्च</p>
+                                <span class="cost-title" id="lblCostTitle">उपचाराचा एकरी अंदाजे खर्च</span>
+                                <p class="cost-sub" id="lblCostSub">सेंद्रिय व रासायनिक औषधांचा सरासरी खर्च</p>
                             </div>
                         </div>
                         <div class="cost-amount neon-green" id="resCost">
-                            ₹ 1,250 <span>/ एकर</span>
+                            ₹ 1,250 <span id="lblPerAcre">/ एकर</span>
                         </div>
                     </div>
 
-                    <!-- Marathi Treatment Tabs -->
+                    <!-- Treatment Tabs -->
                     <div class="cyber-tabs">
                         <button class="tab-btn active" data-tab="organic">
-                            <i class="fa-solid fa-leaf"></i> सेंद्रिय उपाय (Organic)
+                            <i class="fa-solid fa-leaf"></i> <span id="tabOrgTitle">सेंद्रिय उपाय (Organic)</span>
                         </button>
                         <button class="tab-btn" data-tab="chemical">
-                            <i class="fa-solid fa-flask-vial"></i> रासायनिक फवारणी (Chemical)
+                            <i class="fa-solid fa-flask-vial"></i> <span id="tabChemTitle">रासायनिक फवारणी (Chemical)</span>
                         </button>
                         <button class="tab-btn" data-tab="symptoms">
-                            <i class="fa-solid fa-magnifying-glass"></i> रोगाची लक्षणे (Symptoms)
+                            <i class="fa-solid fa-magnifying-glass"></i> <span id="tabSympTitle">रोगाची लक्षणे (Symptoms)</span>
                         </button>
                     </div>
 
                     <!-- Tab Contents -->
                     <div class="tab-panes">
-                        <!-- Organic Pane -->
                         <div class="tab-pane active" id="pane-organic">
                             <div class="pane-header">
                                 <i class="fa-solid fa-seedling neon-green"></i>
-                                <span>पर्यावरणपूरक सेंद्रिय औषधोपचार:</span>
+                                <span id="lblOrgHeader">पर्यावरणपूरक सेंद्रिय औषधोपचार:</span>
                             </div>
-                            <div class="remedy-content-box" id="resOrganic">
-                                <!-- Populated dynamically -->
-                            </div>
+                            <div class="remedy-content-box" id="resOrganic"></div>
                         </div>
 
-                        <!-- Chemical Pane -->
                         <div class="tab-pane" id="pane-chemical">
                             <div class="pane-header">
                                 <i class="fa-solid fa-spray-can-sparkles neon-magenta"></i>
-                                <span>तात्काळ नियंत्रणासाठी रासायनिक फवारणी:</span>
+                                <span id="lblChemHeader">तात्काळ नियंत्रणासाठी रासायनिक फवारणी:</span>
                             </div>
-                            <div class="remedy-content-box" id="resChemical">
-                                <!-- Populated dynamically -->
-                            </div>
+                            <div class="remedy-content-box" id="resChemical"></div>
                         </div>
 
-                        <!-- Symptoms Pane -->
                         <div class="tab-pane" id="pane-symptoms">
                             <div class="pane-header">
                                 <i class="fa-solid fa-circle-info neon-cyan"></i>
-                                <span>पानावरील मुख्य लक्षणे व ओळख:</span>
+                                <span id="lblSympHeader">पानावरील मुख्य लक्षणे व ओळख:</span>
                             </div>
-                            <div class="remedy-content-box" id="resSymptoms">
-                                <!-- Populated dynamically -->
-                            </div>
+                            <div class="remedy-content-box" id="resSymptoms"></div>
                         </div>
                     </div>
 
-                    <!-- Print / Share Bar -->
+                    <!-- Action Buttons -->
                     <div class="result-actions">
                         <button type="button" class="btn-action" onclick="window.print()">
-                            <i class="fa-solid fa-print"></i> रिपोर्ट प्रिंट करा
+                            <i class="fa-solid fa-print"></i> <span id="lblPrint">प्रिंट रिपोर्ट</span>
                         </button>
                         <button type="button" class="btn-action" id="resetBtn">
-                            <i class="fa-solid fa-rotate-right"></i> नवीन स्कॅन करा
+                            <i class="fa-solid fa-rotate-right"></i> <span id="lblReset">नवीन स्कॅन</span>
                         </button>
                     </div>
 
@@ -280,15 +292,13 @@
 
     </main>
 
-    <!-- Footer -->
+    <!-- Minimalist Footer with English Developer Badge -->
     <footer class="cyber-footer">
-        <p>🌾 Crop Disease AI & Smart Agro Doctor • Developed by <strong>संकेत किरदात (Sanket Kirdat)</strong></p>
-        <p>Final Year B.Tech • Department of Artificial Intelligence & Data Science Engineering</p>
-        <p class="footer-tech">Powered by <strong>TensorFlow</strong> • <strong>MobileNetV2</strong> • <strong>Flask</strong> • <strong>Streamlit</strong> • <strong>MySQL</strong></p>
+        <p>🌾 <strong>Crop Disease AI & Smart Agro Doctor</strong> &nbsp;|&nbsp; <span class="dev-badge-corner" style="display:inline-block; padding:2px 8px; font-size:0.75rem;">Dev: <strong>Sanket Kirdat</strong></span></p>
+        <p class="footer-tech">Final Year B.Tech (AI & Data Science) • MobileNetV2 Core</p>
     </footer>
 
     <!-- App JavaScript -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
-

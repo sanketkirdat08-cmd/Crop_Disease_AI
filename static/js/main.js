@@ -1,16 +1,83 @@
 /**
- * Crop Disease AI - Frontend Interactivity & API Integration
- * Handles:
- * - Drag and Drop File Upload
- * - Real-time Image Preview
- * - Laser Scanning Animation
- * - Asynchronous Disease Prediction (/predict)
- * - Dynamic Weather Updates (/api/weather)
- * - Tab Navigation (Organic / Chemical / Symptoms)
+ * Crop Disease AI - Frontend Interactivity & Bilingual Logic
+ * Developer: Sanket Kirdat
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // DOM Elements
+    // Current Active Language
+    let currentLang = "mr";
+
+    // Bilingual Dictionary for Interface Strings
+    const translations = {
+        mr: {
+            hdrSub: "पिकांवरील रोग निदान आणि अचूक कृषी सल्ला प्रणाली",
+            lblLiveWeather: "हवामान व रोग जोखीम",
+            lblTemp: "तापमान",
+            lblHum: "हवेतील आर्द्रता",
+            lblCond: "हवामान स्थिती",
+            lblUploadHeading: "पानाचा फोटो अपलोड / कॅमेरा",
+            lblStep1: "पायरी १",
+            lblStep2: "पायरी २",
+            lblDropPrompt: "येथे फोटो ड्रॅग करा किंवा कॅमेऱ्याने काढा",
+            lblDropTip: "टोमॅटो, बटाटा, मका, द्राक्षे पिकांच्या पानाचा फोटो निवडा",
+            lblBrowse: "गॅलरीमधून निवडा",
+            lblCam: "📸 थेट कॅमेरा सुरू करा",
+            lblScanBtn: "AI रोग स्कॅनिंग सुरू करा",
+            lblScanningMsg: "MobileNetV2 द्वारे पानाचे सखोल विश्लेषण चालू आहे...",
+            lblQuickTest: "अस्सल चाचणी नमुने (Quick Test):",
+            lblResultHeading: "रोग निदान व कृषी सल्ला",
+            lblIdleHeading: "कोणताही निकाल उपलब्ध नाही",
+            lblIdleText: "कृपया डाव्या बाजूला पिकाच्या पानाचा फोटो अपलोड करा किंवा थेट कॅमेऱ्याने फोटो काढा.",
+            lblConf: "अचूकता (Confidence)",
+            lblCostTitle: "उपचाराचा एकरी अंदाजे खर्च",
+            lblCostSub: "सेंद्रिय व रासायनिक औषधांचा सरासरी खर्च",
+            lblPerAcre: "/ एकर",
+            tabOrgTitle: "सेंद्रिय उपाय (Organic)",
+            tabChemTitle: "रासायनिक फवारणी (Chemical)",
+            tabSympTitle: "रोगाची लक्षणे (Symptoms)",
+            lblOrgHeader: "पर्यावरणपूरक सेंद्रिय औषधोपचार:",
+            lblChemHeader: "तात्काळ नियंत्रणासाठी रासायनिक फवारणी:",
+            lblSympHeader: "पानावरील मुख्य लक्षणे व ओळख:",
+            lblPrint: "प्रिंट रिपोर्ट",
+            lblReset: "नवीन स्कॅन"
+        },
+        en: {
+            hdrSub: "AI-Powered Plant Disease Identification & Precision Agro Advisory",
+            lblLiveWeather: "Live Agro-Weather & Risk",
+            lblTemp: "Temperature",
+            lblHum: "Humidity",
+            lblCond: "Condition",
+            lblUploadHeading: "Upload Leaf / Mobile Camera",
+            lblStep1: "Step 1",
+            lblStep2: "Step 2",
+            lblDropPrompt: "Drag & drop leaf photo or capture via camera",
+            lblDropTip: "Supports Tomato, Potato, Corn, Grape & other crop leaves",
+            lblBrowse: "Choose from Files",
+            lblCam: "📸 Capture Live Camera",
+            lblScanBtn: "Start AI Crop Diagnosis",
+            lblScanningMsg: "MobileNetV2 Deep Neural Network Analyzing Specimen...",
+            lblQuickTest: "Verified Real Test Samples (Quick Test):",
+            lblResultHeading: "Disease Diagnosis & Advisory",
+            lblIdleHeading: "No Diagnosis Available Yet",
+            lblIdleText: "Please upload or capture a crop leaf image on the left to begin diagnosis.",
+            lblConf: "Model Confidence",
+            lblCostTitle: "Estimated Treatment Cost",
+            lblCostSub: "Average organic and chemical treatment expenditure",
+            lblPerAcre: "/ Acre",
+            tabOrgTitle: "Organic Remedies",
+            tabChemTitle: "Chemical Sprays",
+            tabSympTitle: "Diagnostic Symptoms",
+            lblOrgHeader: "Certified Bio-Fungicides & Organic Formulations:",
+            lblChemHeader: "Chemical Fungicide Dosages for Immediate Control:",
+            lblSympHeader: "Key Foliar Symptoms & Field Identification:",
+            lblPrint: "Print Summary",
+            lblReset: "New Scan"
+        }
+    };
+
+    // DOM References
+    const btnLangMr = document.getElementById("btnLangMr");
+    const btnLangEn = document.getElementById("btnLangEn");
     const dropZone = document.getElementById("dropZone");
     const fileInput = document.getElementById("fileInput");
     const cameraInput = document.getElementById("cameraInput");
@@ -44,11 +111,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const riskTitle = document.getElementById("riskTitle");
     const riskMessage = document.getElementById("riskMessage");
     const resetBtn = document.getElementById("resetBtn");
-    const dbStatus = document.getElementById("dbStatus");
 
     let selectedFile = null;
+    let selectedFilename = "";
+    let lastResultData = null;
 
-    // 1. File & Camera Selection Triggers
+    // 1. Language Toggle Logic
+    function applyLanguage(lang) {
+        currentLang = lang;
+        const dict = translations[lang];
+
+        for (const [id, text] of Object.entries(dict)) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.textContent = text;
+            }
+        }
+
+        if (lang === "mr") {
+            btnLangMr.classList.add("active");
+            btnLangEn.classList.remove("active");
+            document.documentElement.lang = "mr";
+        } else {
+            btnLangEn.classList.add("active");
+            btnLangMr.classList.remove("active");
+            document.documentElement.lang = "en";
+        }
+
+        // Re-render result if already active
+        if (lastResultData && selectedFile) {
+            triggerAnalysis(true);
+        }
+    }
+
+    btnLangMr.addEventListener("click", () => applyLanguage("mr"));
+    btnLangEn.addEventListener("click", () => applyLanguage("en"));
+
+    // 2. File Selection & Camera
     browseBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         fileInput.click();
@@ -68,9 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     dropZone.addEventListener("click", () => {
-        if (!selectedFile) {
-            fileInput.click();
-        }
+        if (!selectedFile) fileInput.click();
     });
 
     fileInput.addEventListener("change", (e) => {
@@ -79,32 +176,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 2. Drag & Drop Handlers
-    dropZone.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropZone.style.borderColor = "var(--neon-cyan)";
-    });
-
-    dropZone.addEventListener("dragleave", (e) => {
-        e.preventDefault();
-        dropZone.style.borderColor = "rgba(0, 243, 255, 0.35)";
-    });
-
-    dropZone.addEventListener("drop", (e) => {
-        e.preventDefault();
-        dropZone.style.borderColor = "rgba(0, 243, 255, 0.35)";
-        if (e.dataTransfer.files.length > 0) {
-            handleFile(e.dataTransfer.files[0]);
-        }
-    });
-
     function handleFile(file) {
         if (!file.type.startsWith("image/")) {
-            alert("कृपया फक्त फोटो (Image file) निवडा.");
+            alert(currentLang === "mr" ? "कृपया फक्त फोटो निवडा." : "Please select an image file.");
             return;
         }
 
         selectedFile = file;
+        selectedFilename = file.name;
         const reader = new FileReader();
         reader.onload = (e) => {
             previewImg.src = e.target.result;
@@ -115,6 +194,22 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.readAsDataURL(file);
     }
 
+    // 3. Quick Sample Chips
+    document.querySelectorAll(".chip-btn").forEach(chip => {
+        chip.addEventListener("click", async () => {
+            const imgPath = chip.getAttribute("data-img");
+            const sampleName = chip.getAttribute("data-name") + ".jpg";
+            try {
+                const resp = await fetch(imgPath);
+                const blob = await resp.blob();
+                const file = new File([blob], sampleName, { type: "image/jpeg" });
+                handleFile(file);
+            } catch (err) {
+                console.error("Failed to load sample image:", err);
+            }
+        });
+    });
+
     removeImgBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         resetUpload();
@@ -122,7 +217,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function resetUpload() {
         selectedFile = null;
+        selectedFilename = "";
+        lastResultData = null;
         fileInput.value = "";
+        if (cameraInput) cameraInput.value = "";
         previewImg.src = "";
         dropPreview.classList.add("hidden");
         dropPlaceholder.classList.remove("hidden");
@@ -131,7 +229,37 @@ document.addEventListener("DOMContentLoaded", () => {
         scanningStatus.classList.add("hidden");
     }
 
-    // 3. Tab Switching
+    // 4. District Weather Change (Satara Priority)
+    citySelect.addEventListener("change", async () => {
+        const city = citySelect.value;
+        try {
+            const resp = await fetch(`/api/weather?city=${city}`);
+            if (resp.ok) {
+                const data = await resp.json();
+                tempDisplay.textContent = `${data.temp}°C`;
+                humidityDisplay.textContent = `${data.humidity}%`;
+                condDisplay.textContent = (currentLang === "mr") ? data.condition : (data.condition_en || data.condition);
+
+                if (city === "Satara") {
+                    quickAdviceText.textContent = (currentLang === "mr") ? 
+                        "सातारा / पश्चिम घाट परिसरातील अति-आर्द्रतेमुळे करपा व बुरशीचा प्रादुर्भाव वाढू शकतो." :
+                        "Satara / Western Ghats: High moisture levels elevate risk of blight & rhizome rot.";
+                } else if (data.humidity >= 75) {
+                    quickAdviceText.textContent = (currentLang === "mr") ? 
+                        `दमट हवामानामुळे (${data.humidity}%) बुरशीचा प्रादुर्भाव वाढू शकतो. पिकाची पाहणी करा.` :
+                        `High humidity (${data.humidity}%). Fungal sporulation risk elevated.`;
+                } else {
+                    quickAdviceText.textContent = (currentLang === "mr") ? 
+                        "हवामान कोरडे असून रोगाचा धोका मर्यादित आहे." :
+                        "Favorable dry conditions with low fungal infection pressure.";
+                }
+            }
+        } catch (err) {
+            console.error("Weather update error:", err);
+        }
+    });
+
+    // 5. Tab Switching
     const tabBtns = document.querySelectorAll(".tab-btn");
     const tabPanes = document.querySelectorAll(".tab-pane");
 
@@ -147,70 +275,51 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 4. City Weather Change
-    citySelect.addEventListener("change", async () => {
-        const selectedCity = citySelect.value;
-        try {
-            const resp = await fetch(`/api/weather?city=${selectedCity}`);
-            if (resp.ok) {
-                const data = await resp.json();
-                tempDisplay.textContent = `${data.temp}°C`;
-                humidityDisplay.textContent = `${data.humidity}%`;
-                condDisplay.textContent = data.condition;
+    // 6. Submit Prediction
+    analyzeBtn.addEventListener("click", () => triggerAnalysis(false));
 
-                if (data.humidity >= 75) {
-                    quickAdviceText.textContent = `दमट हवामानामुळे (${data.humidity}%) बुरशीजन्य रोगांचा प्रादुर्भाव वाढू शकतो. झाडांची वेळोवेळी पाहणी करा.`;
-                } else {
-                    quickAdviceText.textContent = `हवामान कोरडे असून रोगाचा धोका मर्यादित आहे.`;
-                }
-            }
-        } catch (err) {
-            console.error("हवामान अपडेट करताना अडचण आली:", err);
-        }
-    });
-
-    // 5. Submit Image for Prediction
-    analyzeBtn.addEventListener("click", async () => {
+    async function triggerAnalysis(isSilent) {
         if (!selectedFile) return;
 
-        // Trigger Futuristic Scanning Laser
-        dropZone.classList.add("scanning");
-        scanningStatus.classList.remove("hidden");
-        analyzeBtn.disabled = true;
+        if (!isSilent) {
+            dropZone.classList.add("scanning");
+            scanningStatus.classList.remove("hidden");
+            analyzeBtn.disabled = true;
+        }
 
         const formData = new FormData();
         formData.append("file", selectedFile);
         formData.append("city", citySelect.value);
+        formData.append("lang", currentLang);
 
         try {
-            const response = await fetch("/predict", {
+            const resp = await fetch("/predict", {
                 method: "POST",
                 body: formData
             });
 
-            const result = await response.json();
+            const result = await resp.json();
 
-            // Simulate realistic scanner sweep delay
             setTimeout(() => {
                 dropZone.classList.remove("scanning");
                 scanningStatus.classList.add("hidden");
                 analyzeBtn.disabled = false;
 
                 if (result.success) {
+                    lastResultData = result;
                     displayResults(result);
                 } else {
-                    alert(`त्रुटी: ${result.error || "काहीतरी चूक झाली."}`);
+                    alert(result.error || "Analysis error");
                 }
-            }, 1200);
+            }, isSilent ? 0 : 800);
 
-        } catch (error) {
+        } catch (err) {
             dropZone.classList.remove("scanning");
             scanningStatus.classList.add("hidden");
             analyzeBtn.disabled = false;
-            console.error("Prediction Error:", error);
-            alert("सर्व्हरशी संपर्क होऊ शकला नाही. कृपया Flask सर्व्हर चालू असल्याची खात्री करा.");
+            console.error("Prediction error:", err);
         }
-    });
+    }
 
     function displayResults(data) {
         idleState.classList.add("hidden");
@@ -220,7 +329,8 @@ document.addEventListener("DOMContentLoaded", () => {
         resMarathiName.textContent = data.marathi_name;
         resDiseaseCode.textContent = data.disease_code;
         resConfidence.textContent = `${data.confidence}%`;
-        resCost.innerHTML = `₹ ${data.cost_per_acre.toLocaleString("en-IN")} <span>/ एकर</span>`;
+        const unitLabel = (currentLang === "mr") ? "/ एकर" : "/ Acre";
+        resCost.innerHTML = `₹ ${data.cost_per_acre.toLocaleString("en-IN")} <span id="lblPerAcre">${unitLabel}</span>`;
 
         resOrganic.textContent = data.organic_remedy;
         resChemical.textContent = data.chemical_remedy;
@@ -231,11 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
             riskMessage.textContent = data.weather_alert.message;
         }
 
-        if (data.db_mode && dbStatus) {
-            dbStatus.textContent = data.db_mode;
-        }
-
-        // Smooth scroll to results on mobile devices
         if (window.innerWidth < 980) {
             activeResults.scrollIntoView({ behavior: "smooth" });
         }
@@ -247,4 +352,3 @@ document.addEventListener("DOMContentLoaded", () => {
         idleState.classList.remove("hidden");
     });
 });
-

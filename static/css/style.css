@@ -131,10 +131,54 @@ body.cyber-dark {
     color: var(--text-secondary);
 }
 
-.header-status {
+.header-controls {
     display: flex;
+    align-items: center;
     gap: 14px;
 }
+
+/* Minimalist English-only Developer Corner Badge */
+.dev-badge-corner {
+    background: rgba(0, 243, 255, 0.08);
+    border: 1px solid #00f3ff;
+    color: #00f3ff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 0.8px;
+    box-shadow: 0 0 12px rgba(0, 243, 255, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Bilingual Language Toggle Switch */
+.lang-switch-box {
+    background: rgba(13, 20, 36, 0.8);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 24px;
+    padding: 3px;
+    display: flex;
+    gap: 4px;
+}
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: #8fa0c2;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.lang-btn.active {
+    background: #00f3ff;
+    color: #040814;
+    box-shadow: 0 0 12px #00f3ff;
+}
+
 .status-pill {
     background: rgba(0, 243, 255, 0.08);
     border: 1px solid rgba(0, 243, 255, 0.3);
@@ -371,6 +415,58 @@ body.cyber-dark {
     background: var(--neon-cyan);
     color: #000;
     box-shadow: 0 0 16px var(--neon-cyan);
+}
+
+.btn-group-upload {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-cam-neon {
+    border-color: #00ff88 !important;
+    color: #00ff88 !important;
+}
+.btn-cam-neon:hover {
+    background: #00ff88 !important;
+    color: #040814 !important;
+    box-shadow: 0 0 16px #00ff88 !important;
+}
+
+.quick-samples-bar {
+    margin: 18px 24px 0;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.quick-samples-title {
+    font-size: 0.8rem;
+    color: #8fa0c2;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.sample-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.chip-btn {
+    background: rgba(0, 243, 255, 0.08);
+    border: 1px solid rgba(0, 243, 255, 0.25);
+    color: #edf2fc;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: var(--font-marathi);
+    transition: all 0.2s ease;
+}
+.chip-btn:hover {
+    background: rgba(0, 243, 255, 0.25);
+    border-color: #00f3ff;
+    color: #00f3ff;
+    box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
 }
 
 .drop-preview {
