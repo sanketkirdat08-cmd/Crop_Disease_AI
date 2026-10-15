@@ -194,6 +194,8 @@ def predict_leaf_disease(image_source, filename="", lang="mr"):
         "organic_remedy": details["organic_remedy_marathi"],
         "chemical_remedy": details["chemical_remedy_marathi"],
         "cost_per_acre": details["cost_per_acre"],
+        "organic_cost": details.get("organic_cost", 650),
+        "chemical_cost": details.get("chemical_cost", details["cost_per_acre"]),
         "risk_humidity": details.get("risk_humidity", 75),
         "developer": "Sanket Kirdat"
     }

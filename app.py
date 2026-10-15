@@ -239,6 +239,8 @@ def predict():
             "organic_remedy": diag["organic_remedy"],
             "chemical_remedy": diag["chemical_remedy"],
             "cost_per_acre": diag["cost_per_acre"],
+            "organic_cost": diag.get("organic_cost", 650),
+            "chemical_cost": diag.get("chemical_cost", 1250),
             "weather": weather,
             "weather_alert": weather_alert,
             "db_mode": db.mode,

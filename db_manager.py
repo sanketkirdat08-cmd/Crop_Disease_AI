@@ -46,6 +46,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "१. मॅन्कोझेब ७५% WP (Mancozeb) २.५ ग्रॅम प्रति लिटर किंवा\n२. रिडोमिल गोल्ड (Ridomil Gold) २ ग्रॅम प्रति लिटर पाण्यात मिसळून फवारा.",
         "chemical_en": "1. Spray Mancozeb 75% WP @ 2.5g/liter or Chlorothalonil @ 2g/liter.\n2. In severe cases, apply Azoxystrobin 23% SC @ 1ml/liter.",
         "cost_per_acre": 1250,
+        "organic_cost_per_acre": 650,
+        "chemical_cost_per_acre": 1250,
         "risk_humidity": 75
     },
     "Tomato___Late_blight": {
@@ -60,6 +62,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "१. सिमोक्सॅनिल + मॅन्कोझेब (कर्झेट) ३ ग्रॅम प्रति लिटर किंवा\n२. ॲमेक्टोक्ट्राडिन + डायमेथोमॉर्फ (झॅमप्रो) २ मिली प्रति लिटर पाण्यात फवारा.",
         "chemical_en": "1. Spray Cymoxanil 8% + Mancozeb 64% WP (Curzate) @ 3g/liter.\n2. Or Dimethomorph + Ametoctradin (Zampro) @ 2ml/liter.",
         "cost_per_acre": 1850,
+        "organic_cost_per_acre": 750,
+        "chemical_cost_per_acre": 1850,
         "risk_humidity": 85
     },
     "Tomato___healthy": {
@@ -74,6 +78,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "कोणत्याही रासायनिक औषधांची गरज नाही. झाडाच्या संतुलित पोषणासाठी १९:१९:१९ विद्राव्य खत देऊ शकता.",
         "chemical_en": "No chemical fungicides required. Apply balanced water-soluble 19:19:19 NPK for optimal vegetative and fruiting growth.",
         "cost_per_acre": 350,
+        "organic_cost_per_acre": 350,
+        "chemical_cost_per_acre": 0,
         "risk_humidity": 60
     },
     "Potato___Early_blight": {
@@ -88,6 +94,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "१. अझोक्सीस्ट्रोबिन २३% SC (Amistar) १ मिली प्रति लिटर किंवा\n२. प्रोपिनेब ७०% WP (Antracol) ३ ग्रॅम प्रति लिटर पाण्यात फवारा.",
         "chemical_en": "1. Spray Azoxystrobin 23% SC (Amistar) @ 1ml/liter.\n2. Or Propineb 70% WP (Antracol) @ 3g/liter.",
         "cost_per_acre": 1400,
+        "organic_cost_per_acre": 600,
+        "chemical_cost_per_acre": 1400,
         "risk_humidity": 70
     },
     "Potato___Late_blight": {
@@ -102,6 +110,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "१. मेटलॅक्सिल ८% + मॅन्कोझेब ६४% WP २.५ ग्रॅम प्रति लिटर फवारा.",
         "chemical_en": "1. Spray Metalaxyl-M 4% + Mancozeb 64% (Ridomil Gold) @ 2.5g/liter immediately upon detection.",
         "cost_per_acre": 2100,
+        "organic_cost_per_acre": 800,
+        "chemical_cost_per_acre": 2100,
         "risk_humidity": 85
     },
     "Potato___healthy": {
@@ -116,6 +126,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "फक्त संतुलित एनपीके (NPK) खतांची मात्रा द्या. रासायनिक फवारणीची गरज नाही.",
         "chemical_en": "No chemical sprays needed. Maintain regular potassium and micronutrient feeding.",
         "cost_per_acre": 400,
+        "organic_cost_per_acre": 400,
+        "chemical_cost_per_acre": 0,
         "risk_humidity": 65
     },
     "Corn___Common_rust": {
@@ -130,6 +142,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "१. हेक्झाकोनॅझोल ५% EC (Hexaconazole) २ मिली प्रति लिटर किंवा\n२. प्रोपिकोनाझोल २५% EC (Tilt) १ मिली प्रति लिटर पाण्यात फवारा.",
         "chemical_en": "1. Spray Hexaconazole 5% EC @ 2ml/liter.\n2. Or Propiconazole 25% EC (Tilt) @ 1ml/liter.",
         "cost_per_acre": 950,
+        "organic_cost_per_acre": 500,
+        "chemical_cost_per_acre": 950,
         "risk_humidity": 80
     },
     "Grape___Black_rot": {
@@ -144,6 +158,8 @@ BILINGUAL_DISEASES_DATA = {
         "chemical_mr": "१. मायक्लोब्युटॅनिल १०% WP (Systhane) ०.५ ग्रॅम प्रति लिटर किंवा\n२. टेब्युकोनाझोल २५.९% EC १.५ मिली प्रति लिटर फवारा.",
         "chemical_en": "1. Spray Myclobutanil 10% WP (Systhane) @ 0.5g/liter.\n2. Or Tebuconazole 25.9% EC @ 1.5ml/liter.",
         "cost_per_acre": 2800,
+        "organic_cost_per_acre": 1100,
+        "chemical_cost_per_acre": 2800,
         "risk_humidity": 80
     }
 }
@@ -229,7 +245,9 @@ class DatabaseManager:
                 "symptoms_marathi": info["symptoms_mr"] if is_mr else info["symptoms_en"],
                 "organic_remedy_marathi": info["organic_mr"] if is_mr else info["organic_en"],
                 "chemical_remedy_marathi": info["chemical_mr"] if is_mr else info["chemical_en"],
-                "cost_per_acre": info["cost_per_acre"],
+                "cost_per_acre": info.get("chemical_cost_per_acre", info["cost_per_acre"]),
+                "organic_cost": info.get("organic_cost_per_acre", 650),
+                "chemical_cost": info.get("chemical_cost_per_acre", info["cost_per_acre"]),
                 "risk_humidity": info["risk_humidity"],
                 "crop_mr": info["crop_mr"],
                 "crop_en": info["crop_en"],
@@ -248,6 +266,8 @@ class DatabaseManager:
                 "organic_remedy_marathi": "१. ५% निंबोळी अर्क फवारा.\n२. ट्रायकोडर्मा व्हिरिडी किंवा गोमूत्र फवारा.",
                 "chemical_remedy_marathi": "१. कॉपर ऑक्सिक्लोराईड २.५ ग्रॅम प्रति लिटर किंवा मॅन्कोझेब फवारा.",
                 "cost_per_acre": 1000,
+                "organic_cost": 500,
+                "chemical_cost": 1200,
                 "risk_humidity": 75
             }
         else:
@@ -259,6 +279,8 @@ class DatabaseManager:
                 "organic_remedy_marathi": "1. Spray 5% Neem seed kernel extract.\n2. Apply Trichoderma viride bio-culture.",
                 "chemical_remedy_marathi": "1. Spray Copper Oxychloride @ 2.5g/L or Mancozeb 75 WP.",
                 "cost_per_acre": 1000,
+                "organic_cost": 500,
+                "chemical_cost": 1200,
                 "risk_humidity": 75
             }
 
