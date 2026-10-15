@@ -16,8 +16,13 @@ if sys.platform.startswith("win"):
     except Exception:
         pass
 
-import mysql.connector
-from mysql.connector import Error as MySQLError
+try:
+    import mysql.connector
+    from mysql.connector import Error as MySQLError
+    HAS_MYSQL = True
+except ImportError:
+    HAS_MYSQL = False
+    MySQLError = Exception
 
 # Default MySQL Configuration
 MYSQL_CONFIG = {
@@ -161,6 +166,8 @@ class DatabaseManager:
         self._init_database()
 
     def _get_mysql_connection(self):
+        if not HAS_MYSQL:
+            return None
         try:
             conn = mysql.connector.connect(
                 host=MYSQL_CONFIG["host"],
